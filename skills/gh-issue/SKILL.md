@@ -8,7 +8,7 @@ description: Generate two markdown files for the current branch — a focused Gi
 Generate two local markdown files for the current branch:
 
 1. **`issue.md`** — A focused GitHub issue describing the core problem the branch solves and the high-level approach. Narrow scope: one problem, one solution.
-2. **`comment.md`** — A concise PR comment: 1–3 sentences on what changed and why.
+2. **`comment.md`** — A concise PR comment: bullet points summarizing what changed and why.
 
 These serve different audiences at different moments. The issue is read before the code — it frames the "why" for maintainers and security researchers evaluating the PR. The comment is read alongside the diff — it gives reviewers a quick summary of what changed and why, not a file-by-file inventory.
 
@@ -77,14 +77,15 @@ The comment is a short summary a reviewer reads before or alongside the diff. Ke
 ```markdown
 # [Concise title]
 
-[1–3 sentences: what changed and why.]
+- [bullet point: what changed and why]
+- [bullet point: additional change if needed]
 
 [Optional: link related issues, EIPs, or include benchmark numbers for perf changes.]
 ```
 
 **Do:**
 
-- Write 1–3 sentences summarizing the change
+- Use bullet points to summarize the change
 - Explain why if the diff doesn't make it obvious
 - Link related issues or EIPs
 - Include benchmark numbers for perf changes
