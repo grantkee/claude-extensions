@@ -36,6 +36,12 @@
 - Zero context switching required from the user
 - Fix failing tests without being told how
 
+### 7. Project Context Agent
+- At the start of every plan, spawn the `project-context` agent to analyze/refresh the repo's architecture
+- The agent writes `.claude/project-context.md` — point all subagents to read this file
+- For multi-repo tasks, spawn one instance per unique git remote
+- Do NOT re-analyze if the existing context file is still fresh
+
 ## Task Management
 1. **Plan First**: Write plan to "tasks/todo.md" with checkable items
 2. **Verify Plan**: Check in before starting implementation
