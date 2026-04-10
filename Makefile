@@ -5,11 +5,14 @@ AGENTS_REPO  := agents
 AGENT_MEMORY := $(HOME)/.claude/agent-memory
 CLAUDE_LOCAL := $(HOME)/.claude/CLAUDE.md
 CLAUDE_REPO  := CLAUDE.md
+SETTINGS_LOCAL := $(HOME)/.claude/settings.local.json
+SETTINGS_REPO  := .claude/settings.local.json
 
 RSYNC_FLAGS := -av --exclude='.DS_Store' --exclude='__pycache__' --exclude='*.pyc'
 
 .PHONY: help import import-clean install clean-install import-skill install-skill \
-        import-agents install-agents import-config install-config list diff
+        import-agents install-agents import-config install-config \
+        import-settings install-settings list diff
 
 help: ## Show all targets with descriptions
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  %-18s %s\n", $$1, $$2}'
@@ -18,17 +21,20 @@ import: ## Import all local skills, agents, and config into the repo (additive)
 	rsync $(RSYNC_FLAGS) $(SKILLS_LOCAL)/ $(SKILLS_REPO)/
 	rsync $(RSYNC_FLAGS) $(AGENTS_LOCAL)/ $(AGENTS_REPO)/
 	cp $(CLAUDE_LOCAL) $(CLAUDE_REPO)
+	@[ -f "$(SETTINGS_LOCAL)" ] && cp $(SETTINGS_LOCAL) $(SETTINGS_REPO) || true
 
 import-clean: ## Mirror local skills, agents, and config into the repo (deletes extras)
 	rsync $(RSYNC_FLAGS) --delete $(SKILLS_LOCAL)/ $(SKILLS_REPO)/
 	rsync $(RSYNC_FLAGS) --delete $(AGENTS_LOCAL)/ $(AGENTS_REPO)/
 	cp $(CLAUDE_LOCAL) $(CLAUDE_REPO)
+	@[ -f "$(SETTINGS_LOCAL)" ] && cp $(SETTINGS_LOCAL) $(SETTINGS_REPO) || true
 
 install: ## Install repo skills, agents, and config to local (additive)
 	rsync $(RSYNC_FLAGS) $(SKILLS_REPO)/ $(SKILLS_LOCAL)/
 	mkdir -p $(AGENTS_LOCAL)
 	rsync $(RSYNC_FLAGS) $(AGENTS_REPO)/ $(AGENTS_LOCAL)/
 	cp $(CLAUDE_REPO) $(CLAUDE_LOCAL)
+	@[ -f "$(SETTINGS_REPO)" ] && cp $(SETTINGS_REPO) $(SETTINGS_LOCAL) || true
 	@for agent in $(AGENTS_REPO)/*.md; do \
 		name=$$(basename "$$agent" .md); \
 		mkdir -p "$(AGENT_MEMORY)/$$name"; \
@@ -41,6 +47,7 @@ clean-install: ## Mirror repo to local for all components (deletes extras) — p
 	mkdir -p $(AGENTS_LOCAL)
 	rsync $(RSYNC_FLAGS) --delete $(AGENTS_REPO)/ $(AGENTS_LOCAL)/
 	cp $(CLAUDE_REPO) $(CLAUDE_LOCAL)
+	@[ -f "$(SETTINGS_REPO)" ] && cp $(SETTINGS_REPO) $(SETTINGS_LOCAL) || true
 	@for agent in $(AGENTS_REPO)/*.md; do \
 		name=$$(basename "$$agent" .md); \
 		mkdir -p "$(AGENT_MEMORY)/$$name"; \
@@ -69,6 +76,14 @@ import-config: ## Import CLAUDE.md from local to repo
 install-config: ## Install CLAUDE.md from repo to local
 	cp $(CLAUDE_REPO) $(CLAUDE_LOCAL)
 
+import-settings: ## Import settings.local.json from local to repo
+	@[ -f "$(SETTINGS_LOCAL)" ] || { echo "No local settings at $(SETTINGS_LOCAL)"; exit 1; }
+	cp $(SETTINGS_LOCAL) $(SETTINGS_REPO)
+
+install-settings: ## Install settings.local.json from repo to local
+	@[ -f "$(SETTINGS_REPO)" ] || { echo "No repo settings at $(SETTINGS_REPO)"; exit 1; }
+	cp $(SETTINGS_REPO) $(SETTINGS_LOCAL)
+
 list: ## List skills and agents in both locations
 	@echo "=== Skills: Local ($(SKILLS_LOCAL)) ==="
 	@ls -1 $(SKILLS_LOCAL) 2>/dev/null | grep -v '\.DS_Store' || echo "  (none)"
@@ -91,3 +106,6 @@ diff: ## Dry-run showing what import would change for all components
 	@echo ""
 	@echo "--- CLAUDE.md ---"
 	@diff $(CLAUDE_LOCAL) $(CLAUDE_REPO) || true
+	@echo ""
+	@echo "--- settings.local.json ---"
+	@diff $(SETTINGS_LOCAL) $(SETTINGS_REPO) 2>/dev/null || true
