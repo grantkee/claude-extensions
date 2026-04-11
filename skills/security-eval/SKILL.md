@@ -2,9 +2,10 @@
 name: security-eval
 description: |
   Comprehensive security evaluation for telcoin-network PRs and branches.
-  Orchestrates 9 parallel security agents covering consensus safety, state transitions,
+  Orchestrates 10 parallel security agents covering consensus safety, state transitions,
   cryptographic correctness, DoS vectors, determinism, contract safety, dependency auditing,
-  deep business logic auditing via nemesis, and attacker-perspective DREAD risk scoring.
+  deep business logic auditing via nemesis, attacker-perspective DREAD risk scoring,
+  and STRIDE threat classification.
   Includes independent verification to eliminate false positives and root-cause remediation
   with actionable fixes.
   Trigger on: "security eval", "security review", "security audit PR", "is this PR safe", "pre-merge security"
@@ -12,7 +13,7 @@ description: |
 
 # Security Evaluation Orchestrator
 
-Comprehensive security evaluation for telcoin-network code changes. Spawns 9 specialized security agents in parallel, each focused on a specific attack surface, then independently verifies findings to eliminate false positives and provides root-cause remediation for confirmed vulnerabilities.
+Comprehensive security evaluation for telcoin-network code changes. Spawns 10 specialized security agents in parallel, each focused on a specific attack surface, then independently verifies findings to eliminate false positives and provides root-cause remediation for confirmed vulnerabilities.
 
 ## Severity Scale (Blockchain-Calibrated)
 
@@ -37,13 +38,13 @@ Determine what code to evaluate:
 
 ### Phase 2: Spawn Security Agents
 
-Spawn ALL 9 agents in parallel using the Agent tool. Each agent receives:
+Spawn ALL 10 agents in parallel using the Agent tool. Each agent receives:
 
 1. The list of changed files and their diffs
 2. The full content of changed files
 3. Instructions to read `.claude/project-context.md` for architecture context
 
-The 9 agents and their focus areas:
+The 10 agents and their focus areas:
 
 | Agent                  | Focus                                                                | Skills to Invoke           |
 | ---------------------- | -------------------------------------------------------------------- | -------------------------- |
@@ -56,14 +57,15 @@ The 9 agents and their focus areas:
 | `dependency-auditor`   | New crates, CVE exposure, supply chain, feature flags                | Cargo.toml diff analysis   |
 | `nemesis-auditor`      | Deep iterative business logic + state inconsistency cross-analysis   | nemesis                    |
 | `dread-evaluator`      | Attacker-perspective risk assessment, DREAD scoring, attack surface prioritization | threat-model               |
+| `stride-threat-model`  | STRIDE threat classification: spoofing, tampering, repudiation, info disclosure, DoS, privilege escalation | threat-model |
 
 ### Phase 3: Extract Structured Findings
 
-After all 9 agents complete, extract each discrete finding into a canonical structure:
+After all 10 agents complete, extract each discrete finding into a canonical structure:
 
 ```
 Finding ID: [agent-name]-[N]
-Source Agent: [which of the 9]
+Source Agent: [which of the 10]
 Severity: CRITICAL / HIGH / MEDIUM / LOW / INFO
 Title: [one-line summary]
 Location: file_path:line_number
@@ -107,8 +109,8 @@ Do not present findings to the user before `findings-verifier` completes. Unveri
 
 | Phase | Agents | Notes |
 |-------|--------|-------|
-| 2 | 9 | Fixed — one per security domain |
+| 2 | 10 | Fixed — one per security domain |
 | 4 (via findings-verifier) | 6-12 | Verification agents, depends on finding count and tiers |
 | 4 (re-verify) | 0-3 | Low-confidence CRITICAL/HIGH verdicts only |
 | 4 (remediation) | 3-8 | Confirmed findings only |
-| **Total** | **18-32** | Typical ~23 |
+| **Total** | **19-33** | Typical ~24 |
