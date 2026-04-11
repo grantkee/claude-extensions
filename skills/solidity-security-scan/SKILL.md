@@ -4,7 +4,7 @@ description: |
   Comprehensive security scan for Solidity projects. One-command entry point that orchestrates
   3-4 specialized Solidity agents in parallel: solidity-sentinel (defensive analysis),
   solidity-nemesis (adversarial exploit hypotheses), solidity-gas-architect (gas optimization),
-  and optionally solidity-deploy-auditor (if .s.sol deployment scripts are in scope).
+  and optionally tn-solidity-deploy-auditor (if .s.sol deployment scripts are in scope).
   Consolidates all reports into a unified summary with cross-report pattern analysis.
   Generic — works on any Foundry, Hardhat, or bare Solidity project.
   Trigger on: "solidity security scan", "scan solidity contracts", "audit solidity", "solidity audit",
@@ -22,7 +22,7 @@ One-command security scan for Solidity projects. Spawns 3-4 specialized agents i
 | `solidity-sentinel` | Defensive analysis (aderyn + slither + manual) | Always | `solidity-sentinel-report.md` |
 | `solidity-nemesis` | Adversarial exploit hypotheses with economics | Always | `nemesis.md` + `invariants.md` |
 | `solidity-gas-architect` | Gas optimization with scrutineer validation | Always | `gas-report.md` |
-| `solidity-deploy-auditor` | Deployment script security (5 parallel subagents) | If `.s.sol` files in scope | `solidity-deployment-report.md` |
+| `tn-solidity-deploy-auditor` | Deployment script security (5 parallel subagents) | If `.s.sol` files in scope | `solidity-deployment-report.md` |
 
 ## Severity Scale
 
@@ -194,7 +194,7 @@ Agent({
   description: "Solidity deployment script audit",
   prompt: "You are being spawned as part of a solidity-security-scan orchestration.
 
-Read the agent definition at <target_path_repo>/agents/solidity-deploy-auditor.md and follow its instructions exactly.
+Read the agent definition at <target_path_repo>/agents/tn-solidity-deploy-auditor.md and follow its instructions exactly.
 
 Target path: <target_path>
 Deployment scripts in scope:
@@ -202,7 +202,7 @@ Deployment scripts in scope:
 
 Read .claude/project-context.md at the target path for architecture context.
 
-Execute all phases of the solidity-deploy-auditor agent and write the final report to:
+Execute all phases of the tn-solidity-deploy-auditor agent and write the final report to:
 <target_path>/solidity-deployment-report.md
 
 Report back with a brief summary of findings by severity and subagent."
@@ -328,7 +328,7 @@ After the consolidation agent returns, output a concise summary to the conversat
 - solidity-sentinel → solidity-sentinel-report.md
 - solidity-nemesis → nemesis.md + invariants.md
 - solidity-gas-architect → gas-report.md
-[- solidity-deploy-auditor → solidity-deployment-report.md]
+[- tn-solidity-deploy-auditor → solidity-deployment-report.md]
 
 ### Reports
 - **Full summary**: <target_path>/solidity-security-scan-summary.md

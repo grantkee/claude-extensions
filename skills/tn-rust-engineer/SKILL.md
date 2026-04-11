@@ -7,8 +7,8 @@ description: |
   Trigger on: "implement", "fix", "add", "build", "write code", "refactor", "new feature",
   "bug fix", "write tests", "add tests", "change", "update", "modify", "extend", "port",
   "migrate", "add support for", "wire up", "hook up", "integrate".
-  Do NOT trigger for: code review (use review-tn), e2e debugging (use debug-e2e),
-  contract review (use review-tn-contracts).
+  Do NOT trigger for: code review (use tn-review), e2e debugging (use tn-debug-e2e),
+  contract review (use tn-review-contracts).
 ---
 
 # Telcoin Network Rust Engineer

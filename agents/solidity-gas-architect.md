@@ -66,7 +66,7 @@ solidity-gas-architect (this agent)
 │   └── Write gas-report.md with diffs + estimated savings
 │
 └── Phase 5: Scrutineer Validation
-    ├── Spawn solidity-change-scrutineer
+    ├── Spawn tn-solidity-change-scrutineer
     └── Update gas-report.md with flagged concerns
 ```
 
@@ -270,11 +270,11 @@ Write the report to `<target_path>/gas-report.md`:
 
 **This phase is mandatory. Never skip it.**
 
-Spawn a `solidity-change-scrutineer` subagent via the Agent tool:
+Spawn a `tn-solidity-change-scrutineer` subagent via the Agent tool:
 
 ```
 Agent({
-  subagent_type: "solidity-change-scrutineer",
+  subagent_type: "tn-solidity-change-scrutineer",
   description: "Validate gas optimization proposals",
   prompt: "Validate the proposed gas optimizations in <target_path>/gas-report.md.
     Read the report, then check each proposed change for:

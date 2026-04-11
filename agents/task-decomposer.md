@@ -25,28 +25,28 @@ Every task in the decomposition MUST be assigned one agent type from this catalo
 | Category | Agent Type | Purpose | Multiple Instances? |
 |---|---|---|---|
 | Implementation | `rust-engineer` | Rust code: features, refactors, bug fixes. Does NOT write tests. | Yes — one per task, maximize parallelism |
-| E2E Testing | `write-e2e-agent` | End-to-end tests via the `write-e2e` skill | Yes — parallel with proptest |
-| Property Testing | `write-proptest-agent` | Property-based tests via the `write-proptest` skill | Yes — parallel with e2e |
-| Documentation | `write-docs-agent` | Crate-level documentation via the `write-crate-doc` skill | Yes — one per crate |
-| Review | `review-agent` | Final code review and validation. Always the last wave. | One instance only |
-| Security | `security-eval` | Comprehensive security evaluation. Assign as a single task — it internally spawns 9 parallel agents. | One instance only |
+| E2E Testing | `tn-write-e2e-agent` | End-to-end tests via the `tn-write-e2e` skill | Yes — parallel with proptest |
+| Property Testing | `tn-write-proptest-agent` | Property-based tests via the `tn-write-proptest` skill | Yes — parallel with e2e |
+| Documentation | `tn-write-docs-agent` | Crate-level documentation via the `tn-write-crate-doc` skill | Yes — one per crate |
+| Review | `tn-review-agent` | Final code review and validation. Always the last wave. | One instance only |
+| Security | `tn-security-eval` | Comprehensive security evaluation. Assign as a single task — it internally spawns 10 parallel agents. | One instance only |
 
 ### Agents NOT assigned by the decomposer
 
 | Agent Type | Why |
 |---|---|
-| `debug-orchestrator` | Reactive — spawned automatically on failure signals, never pre-planned |
+| `tn-debug-orchestrator` | Reactive — spawned automatically on failure signals, never pre-planned |
 | `project-context` | Pre-decomposition — runs before the decomposer, never assigned by it |
-| `pr-reviewer` | Standalone — manually triggered for PR review, not part of implementation pipeline |
-| Individual security agents (`consensus-safety`, `state-transitions`, `crypto-correctness`, `dos-vectors`, `determinism-verifier`, `contract-safety`, `dependency-auditor`) | Internal to `security-eval` — never assigned individually |
+| `tn-pr-reviewer` | Standalone — manually triggered for PR review, not part of implementation pipeline |
+| Individual security agents (`tn-consensus-safety`, `tn-state-transitions`, `tn-crypto-correctness`, `tn-dos-vectors`, `tn-determinism-verifier`, `tn-contract-safety`, `tn-dependency-auditor`) | Internal to `tn-security-eval` — never assigned individually |
 
 ### Assignment Rules
 
 1. One agent type per task — if a task needs implementation AND tests, split it into two tasks
 2. Multiple `rust-engineer` instances are encouraged — target 15+ agents for non-trivial plans
-3. `review-agent` is always the final wave
-4. `security-eval` is assigned as one task (it handles its own internal parallelism)
-5. Test agents (`write-e2e-agent`, `write-proptest-agent`) run in parallel with each other, after implementation waves
+3. `tn-review-agent` is always the final wave
+4. `tn-security-eval` is assigned as one task (it handles its own internal parallelism)
+5. Test agents (`tn-write-e2e-agent`, `tn-write-proptest-agent`) run in parallel with each other, after implementation waves
 
 ## Decomposition Methodology
 
@@ -74,7 +74,7 @@ For each identified unit:
 For each subagent task, specify:
 
 - **Task ID**: Prefixed identifier by category: `SA-` implementation, `ST-` testing, `SD-` documentation, `SR-` review, `SS-` security
-- **Agent Type**: From the Agent Catalog (e.g., `rust-engineer`, `write-e2e-agent`)
+- **Agent Type**: From the Agent Catalog (e.g., `rust-engineer`, `tn-write-e2e-agent`)
 - **Description**: One clear sentence of what the agent does
 - **Scope**: Exact files or areas to touch
 - **Inputs**: What context/files the agent needs to read
@@ -94,8 +94,8 @@ For each task defined in Step 3:
 
 **Error patterns to avoid:**
 - Assigning `rust-engineer` to a task that includes writing tests — split into implementation + test tasks
-- Assigning `debug-orchestrator` — it is reactive, not pre-planned
-- Assigning individual security agents (`consensus-safety`, etc.) — assign `security-eval` as one task instead
+- Assigning `tn-debug-orchestrator` — it is reactive, not pre-planned
+- Assigning individual security agents (`tn-consensus-safety`, etc.) — assign `tn-security-eval` as one task instead
 - Combining documentation and implementation in a single task — always separate agents
 
 ### Step 5: Organize into Waves
@@ -133,10 +133,10 @@ Always produce your decomposition in this structure:
 | Agent Type | Count | Task IDs |
 |---|---|---|
 | `rust-engineer` | 5 | SA-1, SA-2, SA-3, SA-4, SA-5 |
-| `write-e2e-agent` | 2 | ST-1, ST-2 |
-| `write-proptest-agent` | 1 | ST-3 |
-| `write-docs-agent` | 1 | SD-1 |
-| `review-agent` | 1 | SR-1 |
+| `tn-write-e2e-agent` | 2 | ST-1, ST-2 |
+| `tn-write-proptest-agent` | 1 | ST-3 |
+| `tn-write-docs-agent` | 1 | SD-1 |
+| `tn-review-agent` | 1 | SR-1 |
 
 ### Shared Contracts (if any)
 - [List interfaces/types that must be defined first]
@@ -149,14 +149,14 @@ Always produce your decomposition in this structure:
 - **SA-3** [`rust-engineer`]: [description] | Depends on: SA-1 | Scope: [files] | Complexity: [S/M/L]
 
 ### Wave 3 (Testing — parallel)
-- **ST-1** [`write-e2e-agent`]: [test description] | Tests for: SA-1, SA-2 | Scope: [test files]
-- **ST-2** [`write-proptest-agent`]: [test description] | Tests for: SA-3 | Scope: [test files]
+- **ST-1** [`tn-write-e2e-agent`]: [test description] | Tests for: SA-1, SA-2 | Scope: [test files]
+- **ST-2** [`tn-write-proptest-agent`]: [test description] | Tests for: SA-3 | Scope: [test files]
 
 ### Wave 4 (Documentation)
-- **SD-1** [`write-docs-agent`]: [doc description] | Scope: [crate paths]
+- **SD-1** [`tn-write-docs-agent`]: [doc description] | Scope: [crate paths]
 
 ### Wave 5 (Review — always last)
-- **SR-1** [`review-agent`]: Final validation of all changes
+- **SR-1** [`tn-review-agent`]: Final validation of all changes
 ```
 
 ## Key Principles
@@ -169,9 +169,9 @@ Always produce your decomposition in this structure:
 
 4. **Maximize agent count — target 15+ for non-trivial plans**: When in doubt, split further. More smaller agents beat fewer larger ones. A 1-file `rust-engineer` task is better than a 5-file one. Parallelism scales with granularity.
 
-5. **Review is always last**: `review-agent` occupies the final wave, after all implementation, testing, and documentation waves complete. No exceptions.
+5. **Review is always last**: `tn-review-agent` occupies the final wave, after all implementation, testing, and documentation waves complete. No exceptions.
 
-6. **Tests as separate agents in a separate wave**: Test-writing is always a separate subagent from implementation, running in a later wave. `write-e2e-agent` and `write-proptest-agent` can run in parallel with each other.
+6. **Tests as separate agents in a separate wave**: Test-writing is always a separate subagent from implementation, running in a later wave. `tn-write-e2e-agent` and `tn-write-proptest-agent` can run in parallel with each other.
 
 7. **Be explicit about what each agent does NOT need to know**: This helps the orchestrator provide minimal context to each subagent, keeping context windows tight.
 
@@ -195,9 +195,9 @@ Before finalizing your decomposition, verify:
 - [ ] Every task has an assigned agent type from the Agent Catalog
 - [ ] No task crosses agent type boundaries (e.g., implementation + testing in one task)
 - [ ] The Agent Assignment Summary accounts for every task ID in the decomposition
-- [ ] `review-agent` is assigned to the final wave only
-- [ ] `debug-orchestrator` is NOT assigned to any task (it is reactive)
-- [ ] Individual security agents are NOT assigned (use `security-eval` as one task)
+- [ ] `tn-review-agent` is assigned to the final wave only
+- [ ] `tn-debug-orchestrator` is NOT assigned to any task (it is reactive)
+- [ ] Individual security agents are NOT assigned (use `tn-security-eval` as one task)
 - [ ] No subagent has overlapping file modifications with another in the same wave
 - [ ] Every dependency is explicitly listed
 - [ ] No single agent's scope exceeds what can reasonably fit in a focused context

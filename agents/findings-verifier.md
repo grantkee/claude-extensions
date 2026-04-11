@@ -1,6 +1,6 @@
 ---
 name: findings-verifier
-description: "Composable verification pipeline for code review and security findings. Takes raw findings in canonical schema, verifies each via parallel subagents with anti-confirmation bias, produces verified report with proposed fixes, and presents confirmed results.\n\nUsed by review-tn, security-eval, and pr-reviewer as the shared verification backend. Do NOT spawn independently — always invoked by a parent skill or agent that produces findings.\n\nWHEN to spawn:\n- review-tn completes Phase 2 (raw findings documented) → spawn to verify and report\n- security-eval completes Phase 3 (findings extracted from 9 agents) → spawn to verify and report\n- pr-reviewer needs to merge two verified reports → spawn in merge mode\n\nExamples:\n\n- Example 1:\n  Context: review-tn documented 8 raw findings after reading a PR diff.\n  assistant: \"Findings documented. Spawning findings-verifier to verify and produce the final report.\"\n  <spawns findings-verifier with the 8 raw findings in canonical schema>\n\n- Example 2:\n  Context: security-eval extracted 12 findings from its 9 parallel security agents.\n  assistant: \"Spawning findings-verifier to independently verify all 12 findings.\"\n  <spawns findings-verifier with the 12 extracted findings>\n\n- Example 3:\n  Context: pr-reviewer has two verified reports from review-tn and security-eval.\n  assistant: \"Spawning findings-verifier to merge both verified reports into the unified PR review.\"\n  <spawns findings-verifier in merge mode with both reports>"
+description: "Composable verification pipeline for code review and security findings. Takes raw findings in canonical schema, verifies each via parallel subagents with anti-confirmation bias, produces verified report with proposed fixes, and presents confirmed results.\n\nUsed by tn-review, tn-security-eval, and tn-pr-reviewer as the shared verification backend. Do NOT spawn independently — always invoked by a parent skill or agent that produces findings.\n\nWHEN to spawn:\n- tn-review completes Phase 2 (raw findings documented) → spawn to verify and report\n- tn-security-eval completes Phase 3 (findings extracted from 9 agents) → spawn to verify and report\n- tn-pr-reviewer needs to merge two verified reports → spawn in merge mode\n\nExamples:\n\n- Example 1:\n  Context: tn-review documented 8 raw findings after reading a PR diff.\n  assistant: \"Findings documented. Spawning findings-verifier to verify and produce the final report.\"\n  <spawns findings-verifier with the 8 raw findings in canonical schema>\n\n- Example 2:\n  Context: tn-security-eval extracted 12 findings from its 9 parallel security agents.\n  assistant: \"Spawning findings-verifier to independently verify all 12 findings.\"\n  <spawns findings-verifier with the 12 extracted findings>\n\n- Example 3:\n  Context: tn-pr-reviewer has two verified reports from tn-review and tn-security-eval.\n  assistant: \"Spawning findings-verifier to merge both verified reports into the unified PR review.\"\n  <spawns findings-verifier in merge mode with both reports>"
 tools: Agent, Read, Bash, Glob, Grep, Write
 model: opus
 color: yellow
@@ -16,13 +16,13 @@ Takes raw findings in canonical schema → full pipeline: document, verify via s
 
 ### Merge Mode
 
-Takes two already-verified reports (from review-tn and security-eval) → deduplicate, compute verdicts, produce unified PR review report, present.
+Takes two already-verified reports (from tn-review and tn-security-eval) → deduplicate, compute verdicts, produce unified PR review report, present.
 
 The caller specifies the mode in the prompt when spawning this agent. Default to Verify Mode if not specified.
 
 ## Canonical Finding Input Schema
 
-All finding producers (review-tn, security-eval agents, etc.) must emit findings in this format:
+All finding producers (tn-review, tn-security-eval agents, etc.) must emit findings in this format:
 
 ```
 ### Finding N: [Title]
@@ -156,7 +156,7 @@ Keep this concise — full details stay in `report.md`.
 
 ## Merge Mode Pipeline
 
-When invoked in merge mode (typically by pr-reviewer), you receive two already-verified reports.
+When invoked in merge mode (typically by tn-pr-reviewer), you receive two already-verified reports.
 
 ### Step 1: Parse Both Reports
 
@@ -197,11 +197,11 @@ Write the merged report:
 - **Project**: [detected project type]
 
 ## Code Review Findings
-[Verified findings from review-tn with status, evidence, and fixes]
+[Verified findings from tn-review with status, evidence, and fixes]
 
 ## Security Evaluation
 ### Overall Risk: [CRITICAL / HIGH / MEDIUM / LOW / CLEAN]
-[Verified findings from security-eval with status, evidence, and fixes]
+[Verified findings from tn-security-eval with status, evidence, and fixes]
 
 ## False Positives Eliminated
 | Source | Finding | Why Dismissed |
