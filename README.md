@@ -60,7 +60,6 @@ Skills are invoked with `/skill-name` and provide domain-specific capabilities.
 
 - `tn-rust-engineer`: Rust development for the telcoin-network repo. Implements features, fixes bugs, refactors code, and adds tests.
 - `add-benchmark`: Generates Criterion benchmarks for measuring latency and throughput of hot paths.
-- `claude-api`: Builds and debugs applications using the Claude API and Anthropic SDKs, with prompt caching.
 
 ### Testing
 
@@ -70,12 +69,14 @@ Skills are invoked with `/skill-name` and provide domain-specific capabilities.
 
 ### Security
 
-- `security-eval`: Orchestrates 9 parallel security agents for a thorough audit covering consensus, state transitions, cryptography, DoS, determinism, contracts, dependencies, deep business logic (nemesis), and DREAD threat assessment.
+- `security-eval`: Orchestrates 10 parallel security agents for a thorough audit covering consensus, state transitions, cryptography, DoS, determinism, contracts, dependencies, deep business logic (nemesis), DREAD threat assessment, and STRIDE threat classification.
 - `review-tn`: Code review and security analysis for telcoin-network Rust code across consensus, execution, and networking layers.
 - `review-tn-contracts`: Code review and security analysis for tn-contracts Solidity code, focusing on access control and invariant compliance.
 - `harden-tn`: Automated hardening sweeps that find non-determinism, panic vectors, missing observability, and async-blocking hazards.
 - `nemesis`: Deep-logic security audit combining first-principles questioning with state inconsistency analysis for maximum business-logic coverage.
 - `threat-model`: Generates structured threat model documentation for audit preparation and attack surface analysis.
+- `feynman-auditor`: Deep business logic bug finder using the Feynman technique. Language-agnostic — questions every line, ordering choice, and implicit assumption.
+- `state-inconsistency-auditor`: Finds state inconsistency bugs where an operation mutates one piece of coupled state without updating its dependent counterpart.
 
 ### Documentation and writing
 
@@ -99,6 +100,8 @@ Agents are autonomous workers spawned by the orchestration system. They run in i
 - `project-context`: Analyzes repo architecture and writes a shared context file that downstream agents reference. Spawned at the start of every planning session.
 - `task-decomposer`: Breaks an implementation plan into focused, parallelizable units of work. Spawned after a plan is designed but before execution begins.
 - `debug-orchestrator`: Triages error output, stack traces, and test failures, then routes them to the right diagnostic skill.
+- `findings-verifier`: Composable verification pipeline for code review and security findings. Shared backend for review-tn, security-eval, and pr-reviewer.
+- `pr-reviewer`: Standalone PR review orchestrator. Combined code review + security evaluation for any PR checkout.
 
 ### Implementation
 
@@ -119,10 +122,13 @@ These agents run in parallel during a `/security-eval` pass. Each covers a speci
 - `determinism-verifier`: HashMap iteration order, SystemTime usage, floating point, thread-dependent ordering.
 - `contract-safety`: Solidity access control, reentrancy, stake accounting, reward distribution.
 - `dependency-auditor`: New crate introductions, CVEs, feature flag changes, supply chain risk.
+- `dread-evaluator`: Attacker-perspective risk assessment using the DREAD framework. Quantitative risk scoring.
+- `stride-threat-model`: STRIDE threat classification (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege).
 
 ### Solidity Analysis
 
 - `solidity-sentinel`: Exhaustive Solidity static analysis combining manual expert review, aderyn, and slither. Three independent tracks each verify findings before consolidation into a single report.
+- `solidity-invariant-auditor`: Extracts business logic from Solidity contracts and formalizes into mathematical invariant properties with Foundry test implementations.
 
 ## Directory structure
 
