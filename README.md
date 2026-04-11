@@ -70,7 +70,7 @@ Skills are invoked with `/skill-name` and provide domain-specific capabilities.
 
 ### Security
 
-- `security-eval`: Orchestrates 7 parallel security agents for a thorough audit covering consensus, state transitions, cryptography, DoS, determinism, contracts, and dependencies.
+- `security-eval`: Orchestrates 9 parallel security agents for a thorough audit covering consensus, state transitions, cryptography, DoS, determinism, contracts, dependencies, deep business logic (nemesis), and DREAD threat assessment.
 - `review-tn`: Code review and security analysis for telcoin-network Rust code across consensus, execution, and networking layers.
 - `review-tn-contracts`: Code review and security analysis for tn-contracts Solidity code, focusing on access control and invariant compliance.
 - `harden-tn`: Automated hardening sweeps that find non-determinism, panic vectors, missing observability, and async-blocking hazards.

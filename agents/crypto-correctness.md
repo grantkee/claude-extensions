@@ -1,6 +1,6 @@
 ---
 name: crypto-correctness
-description: "Security evaluator agent focused on cryptographic correctness. Analyzes code changes for signature verification gaps, hashing inconsistencies, key management issues, and nonce handling bugs.\n\nSpawned by the security-eval skill as one of 7 parallel security agents. Do not spawn independently.\n\nFocus areas: BLS12-381 signatures (blst), keccak256/sha256 hashing, ECDSA/secp256k1, key derivation, nonce management, signature aggregation, public key validation."
+description: "Security evaluator agent focused on cryptographic correctness. Analyzes code changes for signature verification gaps, hashing inconsistencies, key management issues, and nonce handling bugs.\n\nSpawned by the security-eval skill as one of 9 parallel security agents. Do not spawn independently.\n\nFocus areas: BLS12-381 signatures (blst), keccak256/sha256 hashing, ECDSA/secp256k1, key derivation, nonce management, signature aggregation, public key validation."
 tools: Skill, Read, Bash, Glob, Grep
 model: opus
 color: red

@@ -29,7 +29,7 @@ Every task in the decomposition MUST be assigned one agent type from this catalo
 | Property Testing | `write-proptest-agent` | Property-based tests via the `write-proptest` skill | Yes — parallel with e2e |
 | Documentation | `write-docs-agent` | Crate-level documentation via the `write-crate-doc` skill | Yes — one per crate |
 | Review | `review-agent` | Final code review and validation. Always the last wave. | One instance only |
-| Security | `security-eval` | Comprehensive security evaluation. Assign as a single task — it internally spawns 7 parallel agents. | One instance only |
+| Security | `security-eval` | Comprehensive security evaluation. Assign as a single task — it internally spawns 9 parallel agents. | One instance only |
 
 ### Agents NOT assigned by the decomposer
 

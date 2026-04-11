@@ -11,7 +11,7 @@ This repo is a personal library of Claude Code skills and agents, synced across 
 
 The repo has no build system or runtime — it is a flat collection of markdown configuration files. Two top-level directories hold all content: `skills/` (one subdirectory per skill, each containing a `SKILL.md` prompt file) and `agents/` (one `.md` file per agent). The `Makefile` provides `rsync`-based import/export between `~/.claude/skills`, `~/.claude/agents`, and this repo, making it the source-of-truth for cross-device sync. `CLAUDE.md` is the master workflow configuration; it is also synced by `make import`/`make install`. A `settings.local.json` in `.claude/` registers a `UserPromptSubmit` hook that injects a reminder to spawn the `project-context` agent whenever plan-mode keywords are detected in the user's prompt.
 
-The orchestration model is: one orchestrator (Claude in the main context) spawns multiple named agents as subagents. Agents reference skills via the `Skill` tool. Agents that run in the pipeline reference `.claude/project-context.md` in the *target* repo (not this one) as shared context.
+The orchestration model is: one orchestrator (Claude in the main context) spawns multiple named agents as subagents. Agents reference skills via the `Skill` tool. The security and review pipeline has a shared verification backend (`findings-verifier` agent) that all review-producing skills invoke before returning results. Agents that run in the pipeline reference `.claude/project-context.md` in the *target* repo (not this one) as shared context.
 
 ## Module Map
 
@@ -28,9 +28,9 @@ The orchestration model is: one orchestrator (Claude in the main context) spawns
 - `debug-e2e` — Diagnosis of failing e2e tests from stdout/stderr logs
 
 **Security & Auditing**
-- `security-eval` — Orchestrator that spawns 7+ parallel security agents for a full audit pass
-- `review-tn` — Code review and security analysis for telcoin-network Rust code
-- `review-tn-contracts` — Code review and security analysis for tn-contracts Solidity
+- `security-eval` — Orchestrator that spawns 9 parallel security agents (consensus-safety, state-transitions, crypto-correctness, dos-vectors, determinism-verifier, contract-safety, dependency-auditor, nemesis-auditor, dread-evaluator), then hands all extracted findings to `findings-verifier` for independent verification and remediation
+- `review-tn` — Code review and security analysis for telcoin-network Rust code; internally invokes `findings-verifier` before returning results
+- `review-tn-contracts` — Code review and security analysis for tn-contracts Solidity; internally invokes `findings-verifier` before returning results
 - `harden-tn` — Automated hardening sweeps: non-determinism, panics, observability gaps, blocking async
 - `nemesis` — Deep-logic audit combining `feynman-auditor` (Stage 1) and `state-inconsistency-auditor` (Stage 2) with a fusion feedback loop (Stage 3)
 - `feynman-auditor` — Business logic bug finder using the Feynman technique; language-agnostic
@@ -45,13 +45,13 @@ The orchestration model is: one orchestrator (Claude in the main context) spawns
 
 **Tooling**
 - `skill-creator` — Creates and iteratively improves skills; runs evals and benchmarks
-- `create-agent` — (also listed under Development) — agent design consultant
+- `create-agent` — Agent design consultant
 
 ### Agents (`agents/`)
 
 **Orchestration**
 - `project-context` — Analyzes repo architecture; writes `.claude/project-context.md`; spawned first in every plan
-- `task-decomposer` — Decomposes a plan into minimal parallelizable subagent tasks; spawned after plan design
+- `task-decomposer` — Decomposes a plan into minimal parallelizable subagent tasks; spawned after plan design; produces an Agent Assignment Summary
 - `debug-orchestrator` — Triages error output and routes to the right diagnostic skill
 
 **Implementation Pipeline**
@@ -61,29 +61,39 @@ The orchestration model is: one orchestrator (Claude in the main context) spawns
 - `write-docs-agent` — Wraps `write-crate-doc` skill; spawned after test wave
 - `review-agent` — Wraps `review-tn` skill; final validation before presenting results to user
 
-**Security Evaluation (7 parallel agents, all spawned by `security-eval` skill)**
-- `consensus-safety` — BFT quorum logic, vote counting, DAG integrity
-- `state-transitions` — Invariant preservation, atomicity, rollback safety
-- `crypto-correctness` — BLS/ECDSA signatures, hashing, key management, nonces
-- `dos-vectors` — Unbounded allocations, blocking async, amplification
-- `determinism-verifier` — HashMap ordering, SystemTime, floating point, random
-- `contract-safety` — Solidity access control, reentrancy, stake accounting
-- `dependency-auditor` — New crates, CVEs, feature flags, supply chain
+**Review & Verification**
+- `pr-reviewer` — Standalone PR review orchestrator (manually triggered). Detects project type, spawns a code review subagent (review-tn or review-tn-contracts) and security-eval in parallel, then invokes `findings-verifier` in merge mode to produce a unified report. Distinct from `review-agent` (which is a pipeline step post-implementation).
+- `findings-verifier` — Shared verification backend used by review-tn, review-tn-contracts, security-eval, and pr-reviewer. Operates in two modes: **Verify Mode** (takes raw findings in canonical schema, spawns independent verification subagents with anti-confirmation-bias protocol, produces remediation) and **Merge Mode** (deduplicates two already-verified reports and computes Code Review + Security + Overall verdicts). Never spawned independently — always invoked by a parent skill or agent.
+
+**Security Evaluation (9 parallel agents, all spawned by `security-eval` skill)**
+- `consensus-safety` — BFT quorum logic, vote counting, leader election, DAG integrity; uses harden-tn + threat-model skills
+- `state-transitions` — Invariant preservation, atomicity, rollback safety; uses nemesis + review-tn skills
+- `crypto-correctness` — BLS/ECDSA signatures, hashing, key management, nonces; uses review-tn (crypto paths)
+- `dos-vectors` — Unbounded allocations, blocking async, amplification; uses harden-tn (blocking audit)
+- `determinism-verifier` — HashMap ordering, SystemTime, floating point, thread-dependent ordering; uses harden-tn (determinism)
+- `contract-safety` — Solidity access control, reentrancy, stake accounting, upgrade safety; uses review-tn-contracts
+- `dependency-auditor` — New crates, CVEs, feature flags, supply chain; uses Cargo.toml diff analysis
+- `nemesis-auditor` — Deep iterative business logic + state inconsistency cross-analysis; uses nemesis skill
+- `dread-evaluator` — Attacker-perspective risk assessment, DREAD scoring, attack surface prioritization; uses threat-model skill
 
 ## Dependency Rules
 
 - Skills do not depend on each other at the file level; they are independent prompts. However, `nemesis` logically composes `feynman-auditor` and `state-inconsistency-auditor` by running both in sequence.
 - Agents depend on skills via the `Skill` tool call. Wrapper agents (`write-e2e-agent`, `write-proptest-agent`, `write-docs-agent`, `review-agent`) each wrap exactly one skill.
-- `security-eval` (a skill) spawns all 7 security agents — it is the only place those agents should be invoked.
+- `findings-verifier` is the shared verification backend. It must be invoked by: `review-tn` (after Phase 2), `review-tn-contracts` (after Phase 2), `security-eval` (after Phase 3 finding extraction), and `pr-reviewer` (in merge mode after both parallel subagents complete). It is never invoked independently.
+- `security-eval` (a skill) spawns all 8 security agents, then delegates all verification to `findings-verifier`. The 8 agents are internal to security-eval and must never be assigned directly by `task-decomposer` or the orchestrator.
+- `pr-reviewer` is a standalone manually-triggered agent; it is never part of the implementation pipeline. `review-agent` fills that role.
 - `debug-orchestrator` routes to `debug-e2e`, `harden-tn`, or `nemesis` skills depending on failure type; it then hands off fixes to `tn-rust-engineer` agent.
 - `project-context` agent must be spawned before any other agent in a plan session.
-- `task-decomposer` must be spawned before any implementation agents are launched.
+- `task-decomposer` must be spawned before any implementation agents are launched. It explicitly excludes `debug-orchestrator`, `project-context`, `pr-reviewer`, and the 7 individual security domain agents from its assignment catalog.
 - The `CLAUDE.md` at repo root is the authoritative workflow policy; it is installed to `~/.claude/CLAUDE.md` and also exists at the user's global `~/.claude/CLAUDE.md`.
 
 ## Key Abstractions
 
 - **Skill** — A `SKILL.md` markdown file in `skills/<name>/` containing a slash-command prompt with domain context, conventions, and behavioral instructions. Invoked inside agents via the `Skill` tool.
 - **Agent** — A `.md` file in `agents/` with YAML frontmatter (`name`, `description`, `tools`, `model`, `color`, `memory`) followed by a system prompt. Spawned as a subagent by the orchestrator or other agents.
+- **Canonical Finding Schema** — The structured format all review/security skills emit: `Finding ID`, `Source Agent`, `Severity`, `Title`, `Location` (file:line), `Claim` (factual assertion only — no reasoning chain), `Key Question`, `Relevant Files`, `Source`. The claim/reasoning split is the anti-confirmation-bias mechanism: `findings-verifier` subagents see only the claim, never the original analysis.
+- **findings-verifier verification tiers** — Tier 1 (CRITICAL/HIGH): one agent per finding. Tier 2 (MEDIUM): batched 2-3 per agent by subsystem. Tier 3 (LOW): batched 3-5 per agent. INFO: skipped. Max 12 verification agents per invocation (overridable by caller).
 - **Orchestration pipeline** — The fixed wave sequence defined in `CLAUDE.md`: project-context → task-decomposer → tn-rust-engineer (parallel) → test agents (parallel) → docs agent → review-agent.
 - **`project-context.md`** — The shared architecture snapshot written by the `project-context` agent to `.claude/project-context.md` in the *target* repo. All downstream agents are told to read this file before working.
 - **Makefile sync targets** — `import` (local → repo, additive), `import-clean` (local → repo, mirror), `install` (repo → local, additive), `clean-install` (repo → local, mirror, destructive — prompts for confirmation).

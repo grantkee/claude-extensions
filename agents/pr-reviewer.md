@@ -71,7 +71,7 @@ Each review skill internally invokes `findings-verifier` to verify all findings 
 
 - Always runs, regardless of project type
 - Invoke the `security-eval` skill via the Skill tool
-- This spawns 8 parallel security agents internally (consensus-safety, state-transitions, crypto-correctness, dos-vectors, determinism-verifier, contract-safety, dependency-auditor, nemesis-auditor)
+- This spawns 9 parallel security agents internally (consensus-safety, state-transitions, crypto-correctness, dos-vectors, determinism-verifier, contract-safety, dependency-auditor, nemesis-auditor, dread-evaluator)
 
 ### Step 5: Merge and Present Verified Reports
 

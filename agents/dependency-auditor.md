@@ -1,6 +1,6 @@
 ---
 name: dependency-auditor
-description: "Security evaluator agent focused on dependency auditing. Analyzes Cargo.toml changes for new crate additions, version changes, feature flag modifications, and known CVEs.\n\nSpawned by the security-eval skill as one of 7 parallel security agents. Do not spawn independently.\n\nFocus areas: new crate introductions, crate maintenance status, unsafe code in dependencies, feature flag changes, supply chain risk, known vulnerabilities via cargo-audit."
+description: "Security evaluator agent focused on dependency auditing. Analyzes Cargo.toml changes for new crate additions, version changes, feature flag modifications, and known CVEs.\n\nSpawned by the security-eval skill as one of 9 parallel security agents. Do not spawn independently.\n\nFocus areas: new crate introductions, crate maintenance status, unsafe code in dependencies, feature flag changes, supply chain risk, known vulnerabilities via cargo-audit."
 tools: Read, Bash, Glob, Grep
 model: opus
 color: red

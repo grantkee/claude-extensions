@@ -1,6 +1,6 @@
 ---
 name: state-transitions
-description: "Security evaluator agent focused on state transition safety. Analyzes code changes for invariant violations, partial state updates, rollback safety issues, and state corruption vectors.\n\nSpawned by the security-eval skill as one of 7 parallel security agents. Do not spawn independently.\n\nFocus areas: EVM state transitions, database writes, partial operation failures, atomicity guarantees, state rollback paths, cross-component state consistency."
+description: "Security evaluator agent focused on state transition safety. Analyzes code changes for invariant violations, partial state updates, rollback safety issues, and state corruption vectors.\n\nSpawned by the security-eval skill as one of 9 parallel security agents. Do not spawn independently.\n\nFocus areas: EVM state transitions, database writes, partial operation failures, atomicity guarantees, state rollback paths, cross-component state consistency."
 tools: Skill, Read, Bash, Glob, Grep
 model: opus
 color: red

@@ -1,6 +1,6 @@
 ---
 name: dos-vectors
-description: "Security evaluator agent focused on denial-of-service vectors. Analyzes code changes for resource exhaustion, unbounded allocations, amplification attacks, and blocking operations in async contexts.\n\nSpawned by the security-eval skill as one of 7 parallel security agents. Do not spawn independently.\n\nFocus areas: unbounded Vec/HashMap growth, unbounded channel queues, CPU-intensive operations without limits, disk space exhaustion, network amplification, blocking calls in async runtime."
+description: "Security evaluator agent focused on denial-of-service vectors. Analyzes code changes for resource exhaustion, unbounded allocations, amplification attacks, and blocking operations in async contexts.\n\nSpawned by the security-eval skill as one of 9 parallel security agents. Do not spawn independently.\n\nFocus areas: unbounded Vec/HashMap growth, unbounded channel queues, CPU-intensive operations without limits, disk space exhaustion, network amplification, blocking calls in async runtime."
 tools: Skill, Read, Bash, Glob, Grep
 model: opus
 color: red

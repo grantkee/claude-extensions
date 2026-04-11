@@ -1,6 +1,6 @@
 ---
 name: contract-safety
-description: "Security evaluator agent focused on smart contract safety. Analyzes Solidity code changes in tn-contracts for access control issues, reentrancy vulnerabilities, accounting errors, upgrade safety, and invariant violations.\n\nSpawned by the security-eval skill as one of 7 parallel security agents. Do not spawn independently.\n\nFocus areas: ConsensusRegistry, StakeManager, Issuance contracts — access control, system call enforcement, stake accounting, reward distribution, epoch transition safety."
+description: "Security evaluator agent focused on smart contract safety. Analyzes Solidity code changes in tn-contracts for access control issues, reentrancy vulnerabilities, accounting errors, upgrade safety, and invariant violations.\n\nSpawned by the security-eval skill as one of 9 parallel security agents. Do not spawn independently.\n\nFocus areas: ConsensusRegistry, StakeManager, Issuance contracts — access control, system call enforcement, stake accounting, reward distribution, epoch transition safety."
 tools: Skill, Read, Bash, Glob, Grep
 model: opus
 color: red

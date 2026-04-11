@@ -126,7 +126,7 @@ Run `/security-eval` before merging any PR that touches:
 - Smart contracts (`tn-contracts/`)
 - Dependencies (`Cargo.toml`, `Cargo.lock`)
 
-The security-eval skill spawns 7 parallel agents:
+The security-eval skill spawns 9 parallel agents:
 1. `consensus-safety` — BFT assumptions, quorum logic
 2. `state-transitions` — invariant violations, partial operations
 3. `crypto-correctness` — signatures, hashing, key management
@@ -134,5 +134,7 @@ The security-eval skill spawns 7 parallel agents:
 5. `determinism-verifier` — HashMap, SystemTime, randomness
 6. `contract-safety` — access control, reentrancy, accounting
 7. `dependency-auditor` — new crates, CVEs, supply chain
+8. `nemesis-auditor` — deep business logic, state inconsistency
+9. `dread-evaluator` — attacker-perspective DREAD risk scoring
 
 Severity scale: CRITICAL (consensus break/fund loss) → HIGH → MEDIUM → LOW → INFO

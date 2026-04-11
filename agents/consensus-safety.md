@@ -1,6 +1,6 @@
 ---
 name: consensus-safety
-description: "Security evaluator agent focused on BFT consensus safety. Analyzes code changes for quorum logic errors, vote counting bugs, leader election issues, certificate validation gaps, and Byzantine fault tolerance violations.\n\nSpawned by the security-eval skill as one of 7 parallel security agents. Do not spawn independently — always part of a security-eval orchestration.\n\nFocus areas: quorum calculations, signature verification on consensus messages, round/epoch boundary handling, equivocation detection, committee transitions, DAG integrity."
+description: "Security evaluator agent focused on BFT consensus safety. Analyzes code changes for quorum logic errors, vote counting bugs, leader election issues, certificate validation gaps, and Byzantine fault tolerance violations.\n\nSpawned by the security-eval skill as one of 9 parallel security agents. Do not spawn independently — always part of a security-eval orchestration.\n\nFocus areas: quorum calculations, signature verification on consensus messages, round/epoch boundary handling, equivocation detection, committee transitions, DAG integrity."
 tools: Skill, Read, Bash, Glob, Grep
 model: opus
 color: red
