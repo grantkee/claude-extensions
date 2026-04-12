@@ -23,7 +23,7 @@ Read all prior phase outputs:
 Read the shared references:
 - `references/core-rules.md` — severity classification
 - `references/language-adaptation.md` — language-appropriate terminology
-- `references/defi-patterns.md` — load this if auditing DeFi protocols (AMMs, lending, staking, token accounting)
+- `.audit/domain-patterns.md` — domain-specific patterns discovered by Phase -1 (adversarial sequences, coupled state, worked examples)
 
 ## Methodology
 
@@ -40,12 +40,13 @@ For each finding from phases 2-4, construct an adversarial sequence:
 
 ### Adversarial Sequences to Always Test
 
-- Deposit → partial withdraw → claim rewards (rewards computed on which balance?)
-- Stake → unstake half → restake → unstake all (reward debt accumulated correctly?)
-- Open position → add collateral → partial close → health check (cached health factor updated?)
-- Provide liquidity → swaps happen → remove liquidity (fee tracking correct?)
-- Delegate votes → transfer tokens → vote (voting power reflects current balance?)
-- Borrow → partial repay → borrow again → check debt (interest accumulator rebased?)
+Read `.audit/domain-patterns.md` for domain-specific adversarial sequences. Test every sequence listed there against the current findings.
+
+Additionally, for ANY domain, test these generic patterns:
+- **Partial operation → read coupled state** — does partial modify update all coupled values?
+- **Operation A → Operation B → undo A → read B** — does B reflect the undo?
+- **Concurrent actor interleaving** — Actor 1 starts multi-step op, Actor 2 modifies shared state, Actor 1 completes — is Actor 1's result correct?
+- **Accumulator across N operations** — does SUM(individual) == result of single AGGREGATE operation?
 
 ### Path-Dependent Accumulator Check
 
@@ -117,7 +118,7 @@ Write to `.audit/nemesis-scan/phase5-journeys.md`:
 - Every sequence must be CONCRETE — specific functions, specific parameters, specific state transitions
 - Show `file:line` for every step in every sequence
 - Calculate compounding potential — a $1 bug that compounds 1000x is a $1000 bug
-- Check `references/defi-patterns.md` for DeFi-specific patterns when relevant
+- Check `.audit/domain-patterns.md` for domain-specific adversarial sequences and coupled state patterns
 - Tag each sequence with its discovery path (Feynman-only, State-only, or Cross-feed)
 - Include sequences that were NOT viable — this shows coverage
 - Do NOT invent sequences for gaps that don't exist — Rule 6 (evidence or silence)
