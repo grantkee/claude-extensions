@@ -31,16 +31,9 @@
 - Challenge your own work before presenting it
 
 ### 6. Autonomous Bug Fixes
-- When given a bug report: just fix it. Don't ask for hand-holding
-- Point at logs, errors, failing tests - then resolve them
-- Zero context switching required from the user
+- When given a bug report: identify the root of the problem before suggesting fixes
+- Point at logs, errors, failing tests - then identify what caused them
 - Fix failing tests without being told how
-
-### 7. Project Context Agent
-- At the start of every plan, spawn the `project-context` agent to analyze/refresh the repo's architecture
-- The agent writes `.claude/project-context.md` — point all subagents to read this file
-- For multi-repo tasks, spawn one instance per unique git remote
-- Do NOT re-analyze if the existing context file is still fresh
 
 ## Task Management
 1. **Plan First**: Write plan to "tasks/todo.md" with checkable items
@@ -58,79 +51,3 @@
 ## Agent Triggering Manifest
 
 Agents must be spawned proactively based on detected conditions, not reactively after the user asks. Claude's agent-spawning decisions should be driven by the agent's `description` frontmatter.
-
-### Automatic Spawn Rules
-
-| Condition Detected | Agent to Spawn | Priority |
-|---|---|---|
-| Entering plan mode | `project-context` | FIRST — before any other agent |
-| Plan design complete with coding tasks | `task-decomposer` | Before presenting plan to user |
-| Implementation tasks identified | `tn-rust-engineer` | One per task, parallel |
-| Error output / stack trace / test failure | `tn-debug-orchestrator` | Immediate |
-| E2E tests needed after implementation | `tn-write-e2e-agent` | After implementation wave |
-| Property tests needed | `tn-write-proptest-agent` | Parallel with tn-write-e2e-agent |
-| Documentation needed | `tn-write-docs-agent` | After test wave |
-| Final validation before presenting work | `tn-review-agent` | Last step |
-| `/tn-security-eval` invoked | 10 security agents | All parallel |
-
-### Key Principle
-If you're about to do something an agent is designed for, spawn the agent instead of doing it yourself. Agents provide context isolation, parallel execution, and specialized expertise.
-
-## Plan Mode Entry Checklist
-
-**CRITICAL: Every plan mode session MUST follow this checklist. No exceptions.**
-
-1. **Spawn `project-context` agent FIRST** — before designing the plan, before any other agents
-2. Wait for project-context to return (or confirm context is fresh)
-3. Design the plan with full architecture context
-4. Ask me to confirm design decisions when considering more than one option
-5. **Spawn `task-decomposer` agent** — decompose before presenting to user
-6. Present the decomposed plan for user approval
-
-If you skip step 1, the plan will lack architecture context and downstream agents will waste time re-exploring the codebase.
-
-## Implementation Pipeline
-
-After plan approval, execute in waves:
-
-```
-Wave 0: project-context (if not already fresh)
-Wave 1-N: tn-rust-engineer agents (parallel per wave, sequential across waves)
-Wave N+1: tn-write-e2e-agent + tn-write-proptest-agent (parallel)
-Wave N+2: tn-write-docs-agent
-Wave N+3: tn-review-agent (final validation)
-```
-
-Each wave completes before the next begins. Within a wave, maximize parallelism.
-
-## Debug Routing
-
-When error signals appear in the conversation, spawn `tn-debug-orchestrator` immediately:
-
-| Signal | Routed To |
-|---|---|
-| E2E test failure | `tn-debug-e2e` skill |
-| Panic / crash / unwrap failure | `tn-harden` skill (panic audit) |
-| Logic bug / state corruption | `tn-nemesis` skill (deep audit) |
-| Build failure | Direct diagnosis |
-| After diagnosis complete | `tn-rust-engineer` for fix |
-
-Do NOT attempt to debug manually — always route through `tn-debug-orchestrator` for systematic triage.
-
-## Security Evaluation
-
-Run `/tn-security-eval` when reviewing code.
-
-The tn-security-eval skill spawns 10 parallel agents:
-1. `tn-consensus-safety` — BFT assumptions, quorum logic
-2. `tn-state-transitions` — invariant violations, partial operations
-3. `tn-crypto-correctness` — signatures, hashing, key management
-4. `tn-dos-vectors` — resource exhaustion, unbounded allocations
-5. `tn-determinism-verifier` — HashMap, SystemTime, randomness
-6. `tn-contract-safety` — access control, reentrancy, accounting
-7. `tn-dependency-auditor` — new crates, CVEs, supply chain
-8. `tn-nemesis` — deep business logic, state inconsistency
-9. `tn-dread-evaluator` — attacker-perspective DREAD risk scoring
-10. `tn-stride-threat-model` — STRIDE threat classification
-
-Severity scale: CRITICAL (consensus break/fund loss) → HIGH → MEDIUM → LOW → INFO
