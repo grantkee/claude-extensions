@@ -1,13 +1,10 @@
 ---
 name: tn-debug-e2e
 description: |
-  Debug failing end-to-end tests in the telcoin-network blockchain protocol repo.
-  Use this skill whenever the user shares e2e test output (stdout/stderr), mentions a failing e2e test,
-  asks about test_logs, or wants help diagnosing issues in crates/e2e-tests/.
-  Trigger on: test failures, panics, timeouts, assertion errors, race conditions,
-  epoch boundary issues, node restart failures, consensus hangs, or any e2e test debugging.
-  Also trigger when the user pastes log output containing telcoin-network node traces,
-  consensus errors, or execution engine failures from test runs.
+  Debug failing end-to-end tests in the telcoin-network repo (Narwhal/Bullshark consensus +
+  Reth EVM). Trigger when the user shares e2e stdout/stderr, mentions a failing e2e test,
+  asks about test_logs, or pastes node traces, consensus errors, or execution-engine
+  failures. Covers panics, timeouts, races, epoch boundaries, restart failures, consensus hangs.
 ---
 
 # Debug E2E Tests - Telcoin Network

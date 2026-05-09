@@ -1,14 +1,12 @@
 ---
 name: tn-rust-engineer
 description: |
-  Orchestrator skill for Rust development in the telcoin-network repo.
-  Spawns specialized subagents for task analysis, implementation planning,
-  code writing, and verification.
-  Trigger on: "implement", "fix", "add", "build", "write code", "refactor", "new feature",
-  "bug fix", "change", "update", "modify", "extend", "port",
-  "migrate", "add support for", "wire up", "hook up", "integrate".
-  Do NOT trigger for: code review (use tn-review), e2e debugging (use tn-debug-e2e),
-  contract review (use tn-review-contracts), writing tests (use tn-write-e2e / tn-write-proptest).
+  Orchestrator for Rust development in the telcoin-network repo. Spawns subagents for task
+  analysis, implementation planning, code writing, and verification.
+  Trigger on: "implement", "fix", "add", "build", "refactor", "new feature", "bug fix",
+  "extend", "port", "migrate", "wire up", "integrate".
+  Do NOT trigger for: code review (tn-review), e2e debugging (tn-debug-e2e), contract review
+  (tn-review-contracts), writing tests (tn-write-e2e / tn-write-proptest).
 ---
 
 # Telcoin Network Rust Engineer — Orchestrator

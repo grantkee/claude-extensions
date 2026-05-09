@@ -1,13 +1,10 @@
 ---
 name: tn-domain-storage
 description: |
-  Domain expert reference for the storage layer of telcoin-network — consensus DB (REDB),
-  reth-db (MDBX), key encoding, table layout, atomic writes, and epoch-scoped vs persistent
-  table lifecycle.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches the
-  Database trait, table definitions, key/value encoding, snapshot logic, or any code path
-  that reads or writes the consensus DB or epoch records.
-  Teaches the rules that keep consensus and execution storage internally consistent.
+  Domain expert reference for the telcoin-network storage layer — consensus DB (REDB),
+  reth-db (MDBX), key encoding, table layout, atomic writes, epoch-scoped vs persistent
+  tables. Loaded by tn-rust-engineer and tn-domain-reviewer when work touches the Database
+  trait, table definitions, snapshot logic, or any read/write to the consensus DB.
   NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 

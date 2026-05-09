@@ -1,12 +1,11 @@
 ---
 name: tn-domain-contracts
 description: |
-  Domain expert reference for the smart-contract integration layer of telcoin-network —
-  ConsensusRegistry, StakeManager, and Issuance bindings; system calls (concludeEpoch,
+  Domain expert reference for the telcoin-network smart-contract integration layer —
+  ConsensusRegistry, StakeManager, Issuance bindings; system calls (concludeEpoch,
   applyIncentives, applySlashes); validator activation/exit; reward tier accounting.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches
-  crates/tn-reth/src/system_calls.rs, EVM block construction's system-call ordering, or
-  any read/write against the on-chain registries from Rust.
+  Loaded by tn-rust-engineer and tn-domain-reviewer when work touches
+  crates/tn-reth/src/system_calls.rs, system-call ordering, or registry reads from Rust.
   NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 

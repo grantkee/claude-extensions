@@ -1,13 +1,11 @@
 ---
 name: tn-domain-networking
 description: |
-  Domain expert reference for the libp2p networking layer of telcoin-network — gossipsub
-  topics, request-response protocols, peer discovery, epoch-aware filtering, and the
-  ConsensusNetwork lifecycle.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches
+  Domain expert reference for the telcoin-network libp2p layer — gossipsub topics,
+  request-response protocols, peer discovery, epoch-aware filtering, ConsensusNetwork
+  lifecycle. Loaded by tn-rust-engineer and tn-domain-reviewer when work touches
   crates/network-libp2p/**, crates/state-sync/**, peer/topic management, or any code that
   publishes/subscribes/requests over the wire.
-  Teaches the rules that keep the network from accepting cross-epoch or unauthenticated traffic.
   NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 

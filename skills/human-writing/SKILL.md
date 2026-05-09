@@ -1,6 +1,6 @@
 ---
 name: human-writing
-description: Style guide for writing prose that sounds human, not AI-generated. Use this skill whenever Claude writes or edits prose — markdown, GitHub issues, PR descriptions, commit messages, code comments, documentation, changelogs, explanations, or any text that is not pure source code. Also trigger when the user says "write naturally", "sound human", "avoid AI tone", or asks to improve writing. This skill also applies when other writing skills like gh-issue produce output. Do not trigger for pure code generation or structured data.
+description: Style guide for writing prose that sounds human, not AI-generated. Use whenever Claude writes or edits prose — markdown, GitHub issues, PR descriptions, commit messages, code comments, documentation, changelogs, explanations. Also trigger on "write naturally", "sound human", "avoid AI tone". Applies when other writing skills like gh-issue produce output. Do NOT trigger for pure code generation or structured data.
 ---
 
 # Human writing

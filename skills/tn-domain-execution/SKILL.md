@@ -1,13 +1,11 @@
 ---
 name: tn-domain-execution
 description: |
-  Domain expert reference for the execution layer of telcoin-network — Reth integration,
-  EVM block production, payload building, and the executor/engine boundary contract.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches reth_env,
-  payload builder, batch builder's block-shaping logic, base fee derivation, or anything
-  that reads or writes EVM state.
-  Teaches the rules that prevent execution divergence across validators.
-  NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
+  Domain expert reference for the telcoin-network execution layer — Reth integration, EVM
+  block production, payload building, and the executor/engine boundary contract. Loaded by
+  tn-rust-engineer and tn-domain-reviewer when work touches reth_env, payload builder, batch
+  builder's block-shaping logic, base fee derivation, or any code that reads or writes EVM
+  state. NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 
 # tn-domain-execution

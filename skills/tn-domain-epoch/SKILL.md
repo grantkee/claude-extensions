@@ -1,11 +1,10 @@
 ---
 name: tn-domain-epoch
 description: |
-  Domain expert reference for the epoch lifecycle and node-management layer of telcoin-network.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches epoch boundaries,
+  Domain expert reference for the telcoin-network epoch lifecycle and node-management layer.
+  Loaded by tn-rust-engineer and tn-domain-reviewer when work touches epoch boundaries,
   EpochManager, RunEpochMode, GasAccumulator catchup, governance-driven config updates, or
-  anything that reads/writes state at the start or end of an epoch.
-  Teaches the canonical-state rules that prevent chain splits at epoch transitions.
+  any state read/written at the start or end of an epoch.
   NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 

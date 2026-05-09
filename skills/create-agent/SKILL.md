@@ -1,6 +1,6 @@
 ---
 name: create-agent
-description: "Interactive agent design consultant that guides users through creating high-quality Claude Code agent definitions. Use this skill when the user says \"create agent\", \"new agent\", \"make an agent\", \"design an agent\", \"build an agent\", \"I need an agent that\", \"agent for\", \"set up an agent\", or describes wanting an autonomous agent for a specific task. This skill interviews the user, recommends configuration, and generates well-structured agent files with proper boundaries, domain context, quality gates, and optional persistent memory. Do NOT trigger for skill creation requests — those should use the skill-creator skill instead."
+description: "Interactive consultant that interviews the user, recommends configuration, and generates a Claude Code agent definition with hard responsibility boundaries, domain context, quality gates, and optional persistent memory. Trigger on: \"create agent\", \"new agent\", \"design an agent\", \"build an agent\", \"I need an agent that\", \"agent for\", \"set up an agent\". Do NOT trigger for skill creation — use skill-creator instead."
 ---
 
 # Create Agent

@@ -1,12 +1,10 @@
 ---
 name: tn-domain-consensus
 description: |
-  Domain expert reference for the BFT consensus layer of telcoin-network — Bullshark
-  ordering, certificate construction and validation, vote aggregation, header chains,
-  DAG invariants, and quorum math.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches the primary,
-  certifier, proposer, executor (consensus output), or aggregator code paths.
-  Teaches the rules that keep validators in agreement on what was committed.
+  Domain expert reference for the telcoin-network BFT consensus layer — Bullshark ordering,
+  certificate construction and validation, vote aggregation, header chains, DAG invariants,
+  and quorum math. Loaded by tn-rust-engineer and tn-domain-reviewer when work touches the
+  primary, certifier, proposer, executor (consensus output), or aggregator code paths.
   NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 

@@ -1,14 +1,10 @@
 ---
 name: solidity-security-scan
 description: |
-  Comprehensive security scan for Solidity projects. One-command entry point that orchestrates
-  3-4 specialized Solidity agents in parallel: solidity-sentinel (defensive analysis),
-  solidity-nemesis (adversarial exploit hypotheses), solidity-gas-architect (gas optimization),
-  and optionally tn-solidity-deploy-auditor (if .s.sol deployment scripts are in scope).
-  Consolidates all reports into a unified summary with cross-report pattern analysis.
-  Generic — works on any Foundry, Hardhat, or bare Solidity project.
-  Trigger on: "solidity security scan", "scan solidity contracts", "audit solidity", "solidity audit",
-  "security scan contracts", "scan contracts", "full solidity review"
+  Comprehensive security scan for any Solidity project (Foundry, Hardhat, or bare).
+  Orchestrates parallel agents — defensive analysis, adversarial exploit hypotheses, gas
+  optimization, and optional deployment-script auditing — into one consolidated report.
+  Trigger on: "solidity security scan", "audit solidity", "scan contracts", "full solidity review".
 ---
 
 # Solidity Security Scan Orchestrator

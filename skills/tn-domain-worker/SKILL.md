@@ -1,13 +1,11 @@
 ---
 name: tn-domain-worker
 description: |
-  Domain expert reference for the worker layer of telcoin-network — batch construction,
+  Domain expert reference for the telcoin-network worker layer — batch construction,
   transaction pool management, EIP-1559 fee calculation, beneficiary committee enforcement,
-  and the worker/primary boundary contract.
-  Loaded by tn-rust-engineer and tn-domain-reviewer agents when work touches the worker
-  crate, batch-builder, transaction pool, batch fetcher, or quorum-waiter.
-  Teaches the rules that keep worker output valid as input to consensus.
-  NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
+  and the worker/primary boundary contract. Loaded by tn-rust-engineer and tn-domain-reviewer
+  when work touches the worker crate, batch-builder, transaction pool, batch fetcher, or
+  quorum-waiter. NOT user-invocable. Loaded programmatically by tn-* agents via the Skill tool.
 ---
 
 # tn-domain-worker

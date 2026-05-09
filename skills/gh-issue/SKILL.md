@@ -1,6 +1,6 @@
 ---
 name: gh-issue
-description: Generate two markdown files for the current branch — a focused GitHub issue (Problem/Solution) and a broad PR comment summarizing all changes. Use this skill when the user says "create an issue", "write an issue", "gh issue", "draft issue", "issue for this branch", or asks for documentation of what a branch solves. Also trigger when the user wants to describe their branch changes for reviewers, or needs to create context for a PR. Do not trigger for actually posting issues to GitHub via the API — this skill creates local markdown files only.
+description: Generate two markdown files for the current branch — a focused GitHub issue (Problem/Solution) and a broad PR comment summarizing all changes. Trigger on "create an issue", "gh issue", "draft issue", "issue for this branch", or when the user wants to describe their branch changes for reviewers. Do NOT trigger for posting to GitHub via the API — this skill writes local markdown files only.
 ---
 
 # gh-issue

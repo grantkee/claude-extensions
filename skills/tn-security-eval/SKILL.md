@@ -1,14 +1,11 @@
 ---
 name: tn-security-eval
 description: |
-  Comprehensive security evaluation for telcoin-network PRs and branches.
-  Orchestrates 10 parallel security agents covering consensus safety, state transitions,
-  cryptographic correctness, DoS vectors, determinism, contract safety, dependency auditing,
-  deep business logic auditing via nemesis, attacker-perspective DREAD risk scoring,
-  and STRIDE threat classification.
-  Includes independent verification to eliminate false positives and root-cause remediation
-  with actionable fixes.
-  Trigger on: "security eval", "security review", "security audit PR", "is this PR safe", "pre-merge security"
+  Comprehensive security evaluation for telcoin-network PRs and branches. Orchestrates 10
+  parallel agents covering consensus safety, state transitions, crypto, DoS, determinism,
+  contract safety, dependency audit, nemesis logic audit, DREAD scoring, and STRIDE
+  classification, with independent verification to eliminate false positives.
+  Trigger on: "security eval", "security audit PR", "is this PR safe", "pre-merge security".
 ---
 
 # Security Evaluation Orchestrator
