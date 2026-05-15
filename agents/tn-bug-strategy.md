@@ -1,8 +1,6 @@
 ---
 name: tn-bug-strategy
-description: "Phase -1a agent for tn-bug-scan. Reads project-context, target scope, and optional user bug-hunt hints to produce a research plan with 3-8 topics organized into parallel groups. Each topic becomes a tn-bug-researcher agent spawn.
-
-Spawned by tn-bug-orchestrator during Phase -1 (Domain Discovery). Do not spawn independently."
+description: "Phase -1a agent for tn-bug-scan. Reads project-context, target scope, and optional user bug-hunt hints to produce a research plan with 3-8 topics organized into parallel groups. Each topic becomes a tn-bug-researcher agent spawn.\n\nSpawned by tn-bug-orchestrator during Phase -1 (Domain Discovery). Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: yellow

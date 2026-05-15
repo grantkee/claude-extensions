@@ -1,8 +1,6 @@
 ---
 name: tn-bug-mapper
-description: "Phase 1 agent for tn-bug-scan. Builds the Function-State Matrix, Coupled State Dependency Map, and Cross-Reference to produce the unified Bug Map. This map is the foundation for Phases 2-7.
-
-Spawned by tn-bug-orchestrator as Phase 1. Do not spawn independently."
+description: "Phase 1 agent for tn-bug-scan. Builds the Function-State Matrix, Coupled State Dependency Map, and Cross-Reference to produce the unified Bug Map. This map is the foundation for Phases 2-7.\n\nSpawned by tn-bug-orchestrator as Phase 1. Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: cyan

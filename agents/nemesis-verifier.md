@@ -1,8 +1,6 @@
 ---
 name: nemesis-verifier
-description: "Phase 6 agent for nemesis-scan. Verifies all CRITICAL, HIGH, and MEDIUM findings from phases 2-5, eliminating false positives through deep code tracing and optional PoC tests. Produces verified verdicts for each finding.
-
-Spawned by nemesis-orchestrator after Phase 5 completes. Do not spawn independently."
+description: "Phase 6 agent for nemesis-scan. Verifies all CRITICAL, HIGH, and MEDIUM findings from phases 2-5, eliminating false positives through deep code tracing and optional PoC tests. Produces verified verdicts for each finding.\n\nSpawned by nemesis-orchestrator after Phase 5 completes. Do not spawn independently."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 color: yellow

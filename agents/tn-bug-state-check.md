@@ -1,8 +1,6 @@
 ---
 name: tn-bug-state-check
-description: "Phase 3 (full) and Phase 4 (targeted) agent for tn-bug-scan. Performs state-atomicity analysis enriched by Feynman findings — builds mutation matrix, compares parallel paths, checks operation ordering within functions, and analyzes Feynman-enriched targets.
-
-Spawned by tn-bug-orchestrator. Do not spawn independently."
+description: "Phase 3 (full) and Phase 4 (targeted) agent for tn-bug-scan. Performs state-atomicity analysis enriched by Feynman findings — builds mutation matrix, compares parallel paths, checks operation ordering within functions, and analyzes Feynman-enriched targets.\n\nSpawned by tn-bug-orchestrator. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: yellow

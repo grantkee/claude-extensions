@@ -1,8 +1,6 @@
 ---
 name: nemesis-journey
-description: "Phase 5 agent for nemesis-scan. Traces multi-transaction adversarial sequences that exploit findings from both Feynman and State dimensions. Constructs concrete attack paths that chain state gaps with ordering concerns.
-
-Spawned by nemesis-orchestrator after the Phase 4 feedback loop converges. Do not spawn independently."
+description: "Phase 5 agent for nemesis-scan. Traces multi-transaction adversarial sequences that exploit findings from both Feynman and State dimensions. Constructs concrete attack paths that chain state gaps with ordering concerns.\n\nSpawned by nemesis-orchestrator after the Phase 4 feedback loop converges. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: red

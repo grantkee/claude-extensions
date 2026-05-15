@@ -1,8 +1,6 @@
 ---
 name: nemesis-strategy
-description: "Phase -1a agent for nemesis-scan. Reads project-context, target scope, and optional user domain hints to produce a structured research plan with 3-8 topics organized into parallel groups. Each topic becomes a nemesis-researcher agent spawn.
-
-Spawned by nemesis-orchestrator during Phase -1 (Domain Discovery). Do not spawn independently."
+description: "Phase -1a agent for nemesis-scan. Reads project-context, target scope, and optional user domain hints to produce a structured research plan with 3-8 topics organized into parallel groups. Each topic becomes a nemesis-researcher agent spawn.\n\nSpawned by nemesis-orchestrator during Phase -1 (Domain Discovery). Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: yellow

@@ -1,30 +1,6 @@
 ---
 name: solidity-nemesis
-description: "Adversarial exploit hypothesis agent for Solidity protocols. Constructs profitable multi-step attack paths from an attacker's perspective by chaining vulnerabilities into quantified exploit hypotheses. Operates against any Solidity protocol: DeFi, infrastructure, governance, NFT/gaming, bridges. Distinct from sentinel (defensive) — this agent calculates profit, chains vulnerabilities, and writes from the attacker's perspective.
-
-WHEN to spawn:
-- User asks for adversarial analysis or exploit hypothesis generation
-- User says 'attack paths', 'exploit hypothesis', 'attacker perspective', 'nemesis audit'
-- User wants to understand how a sophisticated attacker would target their protocol
-- After sentinel completes and user wants offensive/adversarial depth
-- Before deploying high-value contracts where attacker economics matter
-
-Examples:
-
-- Example 1:
-  Context: User wants to understand attacker economics for their DeFi protocol.
-  assistant: \"Spawning solidity-nemesis to construct exploit hypotheses with profit calculations.\"
-  <spawns solidity-nemesis with target path>
-
-- Example 2:
-  Context: User wants adversarial analysis of a staking/validator infrastructure contract.
-  assistant: \"Spawning solidity-nemesis to identify multi-step attack paths against the staking system.\"
-  <spawns solidity-nemesis with target path>
-
-- Example 3:
-  Context: Sentinel found several medium-severity issues and user wants to know if they chain into something worse.
-  assistant: \"Spawning solidity-nemesis to chain individual findings into multi-step exploit hypotheses.\"
-  <spawns solidity-nemesis with target path>"
+description: "Adversarial exploit hypothesis agent for Solidity protocols. Constructs profitable multi-step attack paths from an attacker's perspective by chaining vulnerabilities into quantified exploit hypotheses. Operates against any Solidity protocol: DeFi, infrastructure, governance, NFT/gaming, bridges. Distinct from sentinel (defensive) — this agent calculates profit, chains vulnerabilities, and writes from the attacker's perspective.\n\nWHEN to spawn:\n- User asks for adversarial analysis or exploit hypothesis generation\n- User says 'attack paths', 'exploit hypothesis', 'attacker perspective', 'nemesis audit'\n- User wants to understand how a sophisticated attacker would target their protocol\n- After sentinel completes and user wants offensive/adversarial depth\n- Before deploying high-value contracts where attacker economics matter\n\nExamples:\n\n- Example 1:\n  Context: User wants to understand attacker economics for their DeFi protocol.\n  assistant: \"Spawning solidity-nemesis to construct exploit hypotheses with profit calculations.\"\n  <spawns solidity-nemesis with target path>\n\n- Example 2:\n  Context: User wants adversarial analysis of a staking/validator infrastructure contract.\n  assistant: \"Spawning solidity-nemesis to identify multi-step attack paths against the staking system.\"\n  <spawns solidity-nemesis with target path>\n\n- Example 3:\n  Context: Sentinel found several medium-severity issues and user wants to know if they chain into something worse.\n  assistant: \"Spawning solidity-nemesis to chain individual findings into multi-step exploit hypotheses.\"\n  <spawns solidity-nemesis with target path>"
 tools: Agent, Read, Bash, Glob, Grep, Write
 model: opus
 color: purple

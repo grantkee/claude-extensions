@@ -1,24 +1,6 @@
 ---
 name: nemesis-orchestrator
-description: "Brain of the nemesis-scan pipeline. Owns Phase -1 (dynamic domain discovery) and the full 8-phase execution. Enforces core rules, manages the Phase 4 feedback loop, coordinates all phase agents, and validates outputs between phases. Accumulates memory about codebase patterns and false positive rates.
-
-Spawned by the /nemesis-scan skill. Do not spawn independently.
-
-WHEN to spawn:
-- /nemesis-scan skill is invoked
-- User requests a deep combined Feynman + state inconsistency audit
-
-Examples:
-
-- Example 1:
-  Context: User invokes /nemesis-scan on a Solidity project.
-  assistant: \"Spawning nemesis-orchestrator to run domain discovery + 8-phase pipeline.\"
-  <spawns nemesis-orchestrator with target scope and domain hints>
-
-- Example 2:
-  Context: User wants maximum-depth audit of a Rust module.
-  assistant: \"Spawning nemesis-orchestrator for deep combined audit.\"
-  <spawns nemesis-orchestrator with target scope>"
+description: "Brain of the nemesis-scan pipeline. Owns Phase -1 (dynamic domain discovery) and the full 8-phase execution. Enforces core rules, manages the Phase 4 feedback loop, coordinates all phase agents, and validates outputs between phases. Accumulates memory about codebase patterns and false positive rates.\n\nSpawned by the /nemesis-scan skill. Do not spawn independently.\n\nWHEN to spawn:\n- /nemesis-scan skill is invoked\n- User requests a deep combined Feynman + state inconsistency audit\n\nExamples:\n\n- Example 1:\n  Context: User invokes /nemesis-scan on a Solidity project.\n  assistant: \"Spawning nemesis-orchestrator to run domain discovery + 8-phase pipeline.\"\n  <spawns nemesis-orchestrator with target scope and domain hints>\n\n- Example 2:\n  Context: User wants maximum-depth audit of a Rust module.\n  assistant: \"Spawning nemesis-orchestrator for deep combined audit.\"\n  <spawns nemesis-orchestrator with target scope>"
 tools: Agent, Read, Glob, Grep, Bash, Write
 model: opus
 color: red

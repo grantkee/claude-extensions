@@ -1,30 +1,6 @@
 ---
 name: tn-solidity-change-scrutineer
-description: "Validates proposed Solidity refactoring changes for high-risk deviations including storage layout shifts, permission drift, variable shadowing, complexity spikes, and compiler version issues. Leaf-node agent — does not spawn subagents.
-
-WHEN to spawn:
-- Gas Architect completes Phase 4 and needs safety validation on proposed diffs
-- User asks to validate Solidity refactoring changes for safety
-- User says 'scrutinize changes', 'validate refactoring', 'check storage safety'
-- Before applying any automated Solidity code changes to a project
-- After any tool generates proposed Solidity diffs that need safety review
-
-Examples:
-
-- Example 1:
-  Context: Gas Architect finished generating optimization proposals.
-  assistant: \"Spawning solidity-change-scrutineer to validate the proposed gas optimizations.\"
-  <spawns solidity-change-scrutineer with report path>
-
-- Example 2:
-  Context: User has a set of refactoring diffs and wants safety validation.
-  assistant: \"Spawning solidity-change-scrutineer to check for storage layout and permission safety.\"
-  <spawns solidity-change-scrutineer with diff context>
-
-- Example 3:
-  Context: User applied automated fixes and wants to verify nothing broke.
-  assistant: \"Spawning solidity-change-scrutineer to validate the applied changes.\"
-  <spawns solidity-change-scrutineer with target path>"
+description: "Validates proposed Solidity refactoring changes for high-risk deviations including storage layout shifts, permission drift, variable shadowing, complexity spikes, and compiler version issues. Leaf-node agent — does not spawn subagents.\n\nWHEN to spawn:\n- Gas Architect completes Phase 4 and needs safety validation on proposed diffs\n- User asks to validate Solidity refactoring changes for safety\n- User says 'scrutinize changes', 'validate refactoring', 'check storage safety'\n- Before applying any automated Solidity code changes to a project\n- After any tool generates proposed Solidity diffs that need safety review\n\nExamples:\n\n- Example 1:\n  Context: Gas Architect finished generating optimization proposals.\n  assistant: \"Spawning solidity-change-scrutineer to validate the proposed gas optimizations.\"\n  <spawns solidity-change-scrutineer with report path>\n\n- Example 2:\n  Context: User has a set of refactoring diffs and wants safety validation.\n  assistant: \"Spawning solidity-change-scrutineer to check for storage layout and permission safety.\"\n  <spawns solidity-change-scrutineer with diff context>\n\n- Example 3:\n  Context: User applied automated fixes and wants to verify nothing broke.\n  assistant: \"Spawning solidity-change-scrutineer to validate the applied changes.\"\n  <spawns solidity-change-scrutineer with target path>"
 tools: Read, Bash, Glob, Grep, Write
 model: opus
 color: yellow

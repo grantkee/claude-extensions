@@ -1,32 +1,6 @@
 ---
 name: tn-foundry-invariant-architect
-description: "Expert in stateful fuzzing and property-based testing for Solidity. Receives formalized invariant properties (INV-XXX) from the solidity-invariant-auditor and produces compilable Foundry invariant tests with Handler contracts and ghost variables.
-
-WHEN to spawn:
-- Called by solidity-invariant-auditor after invariant formalization is complete
-- User has a set of formalized invariant properties and needs Foundry test implementations
-- User says 'implement invariant tests', 'write handlers', 'foundry invariant code'
-- User has an invariants.md Property Map and wants executable tests
-
-<example>
-Context: The invariant-auditor has formalized 8 properties for a staking contract.
-user: 'Here are the formalized invariants (INV-001 through INV-008). Implement them as Foundry tests.'
-assistant: 'Spawning foundry-invariant-architect to implement the invariant test suite with Handlers and ghost variables.'
-<spawns foundry-invariant-architect with invariant specs and contract paths>
-<commentary>
-The invariants are already formalized — the architect's job is pure implementation, not discovery.
-</commentary>
-</example>
-
-<example>
-Context: The invariant-auditor finished steps 1-3 and needs test code written.
-caller: 'Implement these invariant properties as Foundry tests: [INV-001: totalSupply == sum(balances), INV-002: stake[addr] <= totalStaked, ...]'
-assistant: 'Spawning foundry-invariant-architect with the formalized properties and contract paths.'
-<spawns foundry-invariant-architect with property list>
-<commentary>
-This is the standard handoff from auditor to architect — properties in, compilable tests out.
-</commentary>
-</example>"
+description: "Expert in stateful fuzzing and property-based testing for Solidity. Receives formalized invariant properties (INV-XXX) from the solidity-invariant-auditor and produces compilable Foundry invariant tests with Handler contracts and ghost variables.\n\nWHEN to spawn:\n- Called by solidity-invariant-auditor after invariant formalization is complete\n- User has a set of formalized invariant properties and needs Foundry test implementations\n- User says 'implement invariant tests', 'write handlers', 'foundry invariant code'\n- User has an invariants.md Property Map and wants executable tests\n\n<example>\nContext: The invariant-auditor has formalized 8 properties for a staking contract.\nuser: 'Here are the formalized invariants (INV-001 through INV-008). Implement them as Foundry tests.'\nassistant: 'Spawning foundry-invariant-architect to implement the invariant test suite with Handlers and ghost variables.'\n<spawns foundry-invariant-architect with invariant specs and contract paths>\n<commentary>\nThe invariants are already formalized — the architect's job is pure implementation, not discovery.\n</commentary>\n</example>\n\n<example>\nContext: The invariant-auditor finished steps 1-3 and needs test code written.\ncaller: 'Implement these invariant properties as Foundry tests: [INV-001: totalSupply == sum(balances), INV-002: stake[addr] <= totalStaked, ...]'\nassistant: 'Spawning foundry-invariant-architect with the formalized properties and contract paths.'\n<spawns foundry-invariant-architect with property list>\n<commentary>\nThis is the standard handoff from auditor to architect — properties in, compilable tests out.\n</commentary>\n</example>"
 tools: [Read, Write, Glob, Grep, Bash, Edit]
 model: opus
 color: green

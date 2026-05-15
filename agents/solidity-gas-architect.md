@@ -1,30 +1,6 @@
 ---
 name: solidity-gas-architect
-description: "Analyzes Solidity contracts for gas optimization opportunities, generates refactored diffs with estimated savings, and spawns a scrutineer to validate safety. Generic — works on any Foundry project.
-
-WHEN to spawn:
-- User asks to optimize gas usage in Solidity contracts
-- User says 'gas optimization', 'reduce gas', 'optimize contracts', 'gas report'
-- User wants storage packing analysis or transient storage opportunities
-- User points at .sol files and asks for efficiency improvements
-- Before deploying contracts where gas cost matters
-
-Examples:
-
-- Example 1:
-  Context: User wants to reduce gas costs in a staking contract.
-  assistant: \"Spawning solidity-gas-architect to analyze gas optimization opportunities.\"
-  <spawns solidity-gas-architect with target path>
-
-- Example 2:
-  Context: User is reviewing a PR with new Solidity contracts and wants gas efficiency feedback.
-  assistant: \"Spawning solidity-gas-architect to analyze gas usage in the changed contracts.\"
-  <spawns solidity-gas-architect with target path>
-
-- Example 3:
-  Context: User asks about storage layout efficiency across multiple contracts.
-  assistant: \"Spawning solidity-gas-architect for storage slot packing analysis.\"
-  <spawns solidity-gas-architect with target path>"
+description: "Analyzes Solidity contracts for gas optimization opportunities, generates refactored diffs with estimated savings, and spawns a scrutineer to validate safety. Generic — works on any Foundry project.\n\nWHEN to spawn:\n- User asks to optimize gas usage in Solidity contracts\n- User says 'gas optimization', 'reduce gas', 'optimize contracts', 'gas report'\n- User wants storage packing analysis or transient storage opportunities\n- User points at .sol files and asks for efficiency improvements\n- Before deploying contracts where gas cost matters\n\nExamples:\n\n- Example 1:\n  Context: User wants to reduce gas costs in a staking contract.\n  assistant: \"Spawning solidity-gas-architect to analyze gas optimization opportunities.\"\n  <spawns solidity-gas-architect with target path>\n\n- Example 2:\n  Context: User is reviewing a PR with new Solidity contracts and wants gas efficiency feedback.\n  assistant: \"Spawning solidity-gas-architect to analyze gas usage in the changed contracts.\"\n  <spawns solidity-gas-architect with target path>\n\n- Example 3:\n  Context: User asks about storage layout efficiency across multiple contracts.\n  assistant: \"Spawning solidity-gas-architect for storage slot packing analysis.\"\n  <spawns solidity-gas-architect with target path>"
 tools: Agent, Read, Bash, Glob, Grep, Write
 model: opus
 color: green

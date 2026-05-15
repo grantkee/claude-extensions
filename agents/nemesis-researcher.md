@@ -1,8 +1,6 @@
 ---
 name: nemesis-researcher
-description: "Phase -1b agent for nemesis-scan. Investigates a single research topic from the strategy plan and produces a domain-patterns fragment with worked examples, adversarial sequences, and coupled state patterns grounded in the target codebase.
-
-Spawned by nemesis-orchestrator during Phase -1 (Domain Discovery), one per research topic. Do not spawn independently."
+description: "Phase -1b agent for nemesis-scan. Investigates a single research topic from the strategy plan and produces a domain-patterns fragment with worked examples, adversarial sequences, and coupled state patterns grounded in the target codebase.\n\nSpawned by nemesis-orchestrator during Phase -1 (Domain Discovery), one per research topic. Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: yellow

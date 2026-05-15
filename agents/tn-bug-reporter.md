@@ -1,8 +1,6 @@
 ---
 name: tn-bug-reporter
-description: "Phase 7 agent for tn-bug-scan. Compiles verified findings into the final bug-ticket report following the exact template from bug-ticket-format.md. Produces both the verified report and the raw intermediate report.
-
-Spawned by tn-bug-orchestrator as the final phase. Do not spawn independently."
+description: "Phase 7 agent for tn-bug-scan. Compiles verified findings into the final bug-ticket report following the exact template from bug-ticket-format.md. Produces both the verified report and the raw intermediate report.\n\nSpawned by tn-bug-orchestrator as the final phase. Do not spawn independently."
 tools: Read, Glob, Grep, Write
 model: sonnet
 color: green

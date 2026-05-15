@@ -1,8 +1,6 @@
 ---
 name: nemesis-state-check
-description: "Phase 3 agent for nemesis-scan. Performs state inconsistency analysis enriched by Feynman findings — builds mutation matrix, compares parallel paths, checks operation ordering, and analyzes Feynman-enriched targets. Also used in Phase 4 targeted mode for checking specific coupled pairs.
-
-Spawned by nemesis-orchestrator. Do not spawn independently."
+description: "Phase 3 agent for nemesis-scan. Performs state inconsistency analysis enriched by Feynman findings — builds mutation matrix, compares parallel paths, checks operation ordering, and analyzes Feynman-enriched targets. Also used in Phase 4 targeted mode for checking specific coupled pairs.\n\nSpawned by nemesis-orchestrator. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: yellow

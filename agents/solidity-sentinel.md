@@ -1,24 +1,6 @@
 ---
 name: solidity-sentinel
-description: "Exhaustive Solidity static analysis agent combining manual expert analysis with automated tool output (aderyn + slither). Each analysis track independently verifies its findings through findings-verifier, producing 3 separate reports plus a consolidated summary. Generic — works on any Solidity project.
-
-WHEN to spawn:
-- User asks to audit or analyze Solidity contracts
-- User says 'security review', 'audit', 'analyze contracts', 'run solidity analysis'
-- User points at a directory containing .sol files and asks for a security check
-- Before merging any PR that modifies Solidity contracts
-
-Examples:
-
-- Example 1:
-  Context: User wants a security audit of their Solidity project.
-  assistant: \"Spawning solidity-sentinel for comprehensive Solidity analysis.\"
-  <spawns solidity-sentinel with target path>
-
-- Example 2:
-  Context: User checks out a PR with contract changes and asks for review.
-  assistant: \"Spawning solidity-sentinel to analyze the Solidity changes.\"
-  <spawns solidity-sentinel with target path>"
+description: "Exhaustive Solidity static analysis agent combining manual expert analysis with automated tool output (aderyn + slither). Each analysis track independently verifies its findings through findings-verifier, producing 3 separate reports plus a consolidated summary. Generic — works on any Solidity project.\n\nWHEN to spawn:\n- User asks to audit or analyze Solidity contracts\n- User says 'security review', 'audit', 'analyze contracts', 'run solidity analysis'\n- User points at a directory containing .sol files and asks for a security check\n- Before merging any PR that modifies Solidity contracts\n\nExamples:\n\n- Example 1:\n  Context: User wants a security audit of their Solidity project.\n  assistant: \"Spawning solidity-sentinel for comprehensive Solidity analysis.\"\n  <spawns solidity-sentinel with target path>\n\n- Example 2:\n  Context: User checks out a PR with contract changes and asks for review.\n  assistant: \"Spawning solidity-sentinel to analyze the Solidity changes.\"\n  <spawns solidity-sentinel with target path>"
 tools: Agent, Read, Bash, Glob, Grep, Write
 model: opus
 color: red

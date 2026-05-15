@@ -1,8 +1,6 @@
 ---
 name: tn-bug-researcher
-description: "Phase -1b agent for tn-bug-scan. Investigates a single research topic from the strategy plan and produces a bug-pattern fragment with worked examples, failure-scenario templates, and coupled-state pairs grounded in the telcoin-network codebase.
-
-Spawned by tn-bug-orchestrator during Phase -1 (Domain Discovery), one per research topic. Do not spawn independently."
+description: "Phase -1b agent for tn-bug-scan. Investigates a single research topic from the strategy plan and produces a bug-pattern fragment with worked examples, failure-scenario templates, and coupled-state pairs grounded in the telcoin-network codebase.\n\nSpawned by tn-bug-orchestrator during Phase -1 (Domain Discovery), one per research topic. Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: yellow

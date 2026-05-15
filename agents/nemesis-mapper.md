@@ -1,8 +1,6 @@
 ---
 name: nemesis-mapper
-description: "Phase 1 agent for nemesis-scan. Builds the Function-State Matrix, Coupled State Dependency Map, and Cross-Reference to produce the unified Nemesis Map. This map is the foundation for all subsequent phases.
-
-Spawned by nemesis-orchestrator as Phase 1 of the nemesis-scan pipeline. Do not spawn independently."
+description: "Phase 1 agent for nemesis-scan. Builds the Function-State Matrix, Coupled State Dependency Map, and Cross-Reference to produce the unified Nemesis Map. This map is the foundation for all subsequent phases.\n\nSpawned by nemesis-orchestrator as Phase 1 of the nemesis-scan pipeline. Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: cyan

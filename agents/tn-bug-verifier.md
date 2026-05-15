@@ -1,8 +1,6 @@
 ---
 name: tn-bug-verifier
-description: "Phase 6 agent for tn-bug-scan. Verifies all CRITICAL, HIGH, and MEDIUM findings from phases 2-5 via code tracing and optional PoC tests, cross-checks each finding against the relevant tn-domain-* skill's invariants, and eliminates false positives.
-
-Spawned by tn-bug-orchestrator after Phase 5 completes. Do not spawn independently."
+description: "Phase 6 agent for tn-bug-scan. Verifies all CRITICAL, HIGH, and MEDIUM findings from phases 2-5 via code tracing and optional PoC tests, cross-checks each finding against the relevant tn-domain-* skill's invariants, and eliminates false positives.\n\nSpawned by tn-bug-orchestrator after Phase 5 completes. Do not spawn independently."
 tools: Skill, Read, Glob, Grep, Bash, Write
 model: opus
 color: yellow

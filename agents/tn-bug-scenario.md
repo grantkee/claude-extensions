@@ -1,8 +1,6 @@
 ---
 name: tn-bug-scenario
-description: "Phase 5 agent for tn-bug-scan. Traces multi-event failure scenarios that chain state gaps and ordering concerns into concrete production failures. Every scenario names at least one production event class: epoch transition, node restart, network partition, concurrent load, message reorder, or mid-flush crash.
-
-Spawned by tn-bug-orchestrator after Phase 4 converges. Do not spawn independently."
+description: "Phase 5 agent for tn-bug-scan. Traces multi-event failure scenarios that chain state gaps and ordering concerns into concrete production failures. Every scenario names at least one production event class: epoch transition, node restart, network partition, concurrent load, message reorder, or mid-flush crash.\n\nSpawned by tn-bug-orchestrator after Phase 4 converges. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: red

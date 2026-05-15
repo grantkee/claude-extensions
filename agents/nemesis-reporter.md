@@ -1,8 +1,6 @@
 ---
 name: nemesis-reporter
-description: "Phase 7 agent for nemesis-scan. Generates the final verified report from Phase 6 verification output and all phase artifacts. Produces both the verified report and raw intermediate report.
-
-Spawned by nemesis-orchestrator as the final phase. Do not spawn independently."
+description: "Phase 7 agent for nemesis-scan. Generates the final verified report from Phase 6 verification output and all phase artifacts. Produces both the verified report and raw intermediate report.\n\nSpawned by nemesis-orchestrator as the final phase. Do not spawn independently."
 tools: Read, Glob, Grep, Write
 model: sonnet
 color: green

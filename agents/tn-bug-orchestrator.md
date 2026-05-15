@@ -1,24 +1,6 @@
 ---
 name: tn-bug-orchestrator
-description: "Brain of the tn-bug-scan pipeline. Owns Phase -1 (dynamic domain discovery), the full 9-phase execution, and the Phase 4 feedback loop. Bug-hunter framing — targets correctness failures (crash / stall / fork / divergence / silent wrong state) in telcoin-network rather than adversarial exploit paths.
-
-Spawned by the /tn-bug-scan skill. Do not spawn independently.
-
-WHEN to spawn:
-- /tn-bug-scan skill is invoked
-- User requests a deep bug hunt across telcoin-network code (Rust or Solidity)
-
-Examples:
-
-- Example 1:
-  Context: User invokes /tn-bug-scan on a consensus crate.
-  assistant: \"Spawning tn-bug-orchestrator to run domain discovery + 9-phase bug-hunt pipeline.\"
-  <spawns tn-bug-orchestrator with target scope and domain hints>
-
-- Example 2:
-  Context: User wants bug tickets for the current PR diff.
-  assistant: \"Spawning tn-bug-orchestrator with PR-diff scope.\"
-  <spawns tn-bug-orchestrator with target scope derived from git diff>"
+description: "Brain of the tn-bug-scan pipeline. Owns Phase -1 (dynamic domain discovery), the full 9-phase execution, and the Phase 4 feedback loop. Bug-hunter framing — targets correctness failures (crash / stall / fork / divergence / silent wrong state) in telcoin-network rather than adversarial exploit paths.\n\nSpawned by the /tn-bug-scan skill. Do not spawn independently.\n\nWHEN to spawn:\n- /tn-bug-scan skill is invoked\n- User requests a deep bug hunt across telcoin-network code (Rust or Solidity)\n\nExamples:\n\n- Example 1:\n  Context: User invokes /tn-bug-scan on a consensus crate.\n  assistant: \"Spawning tn-bug-orchestrator to run domain discovery + 9-phase bug-hunt pipeline.\"\n  <spawns tn-bug-orchestrator with target scope and domain hints>\n\n- Example 2:\n  Context: User wants bug tickets for the current PR diff.\n  assistant: \"Spawning tn-bug-orchestrator with PR-diff scope.\"\n  <spawns tn-bug-orchestrator with target scope derived from git diff>"
 tools: Agent, Read, Glob, Grep, Bash, Write
 model: opus
 color: red

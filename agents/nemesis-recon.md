@@ -1,8 +1,6 @@
 ---
 name: nemesis-recon
-description: "Phase 0 agent for nemesis-scan. Performs attacker reconnaissance BEFORE deep code reading — identifies attack goals, novel code, value stores, complex paths, and coupled value hypotheses. Produces the Attacker's Hit List that drives priority for all subsequent phases.
-
-Spawned by nemesis-orchestrator as the first phase of the nemesis-scan pipeline. Do not spawn independently."
+description: "Phase 0 agent for nemesis-scan. Performs attacker reconnaissance BEFORE deep code reading — identifies attack goals, novel code, value stores, complex paths, and coupled value hypotheses. Produces the Attacker's Hit List that drives priority for all subsequent phases.\n\nSpawned by nemesis-orchestrator as the first phase of the nemesis-scan pipeline. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: red

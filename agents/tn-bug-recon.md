@@ -1,8 +1,6 @@
 ---
 name: tn-bug-recon
-description: "Phase 0 agent for tn-bug-scan. Performs bug-hunter reconnaissance BEFORE deep code reading — builds a ranked bug-hotspot hit list covering concurrency hot zones, determinism-critical paths, consensus-sensitive code, coupled-state hotspots, panic surfaces, and fork-risk code. Drives priority for all subsequent phases.
-
-Spawned by tn-bug-orchestrator as the first non-discovery phase. Do not spawn independently."
+description: "Phase 0 agent for tn-bug-scan. Performs bug-hunter reconnaissance BEFORE deep code reading — builds a ranked bug-hotspot hit list covering concurrency hot zones, determinism-critical paths, consensus-sensitive code, coupled-state hotspots, panic surfaces, and fork-risk code. Drives priority for all subsequent phases.\n\nSpawned by tn-bug-orchestrator as the first non-discovery phase. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: red

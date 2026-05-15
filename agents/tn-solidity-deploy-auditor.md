@@ -1,30 +1,6 @@
 ---
 name: tn-solidity-deploy-auditor
-description: "Evaluates Solidity Forge/Foundry deployment scripts (.s.sol files) for security vulnerabilities, structural issues, and gas optimizations. Spawns 5 parallel subagents (Key-Guard, Proxy-Sentinel, Environment-Auditor, Gas-Architect, Nemesis) to analyze deployment transaction ordering, key management, proxy initialization atomicity, and front-running risks. Hands off to findings-verifier for independent verification.
-
-WHEN to spawn:
-- User asks to audit or review Foundry deployment scripts
-- User says 'deploy audit', 'review deploy script', 'deployment security', 'script review'
-- User points at .s.sol files and asks for a security check
-- Before deploying contracts to mainnet where key management and transaction ordering matter
-- User asks about deployment atomicity, front-running risks, or proxy initialization gaps
-
-Examples:
-
-- Example 1:
-  Context: User wants to review a deployment script before mainnet launch.
-  assistant: \"Spawning solidity-deploy-auditor for deployment script security analysis.\"
-  <spawns solidity-deploy-auditor with target path>
-
-- Example 2:
-  Context: User checks out a PR with changes to a .s.sol file.
-  assistant: \"Spawning solidity-deploy-auditor to analyze the deployment script changes.\"
-  <spawns solidity-deploy-auditor with target path>
-
-- Example 3:
-  Context: User asks whether their proxy deployment has initialization gaps.
-  assistant: \"Spawning solidity-deploy-auditor to check proxy atomicity and initialization safety.\"
-  <spawns solidity-deploy-auditor with script path>"
+description: "Evaluates Solidity Forge/Foundry deployment scripts (.s.sol files) for security vulnerabilities, structural issues, and gas optimizations. Spawns 5 parallel subagents (Key-Guard, Proxy-Sentinel, Environment-Auditor, Gas-Architect, Nemesis) to analyze deployment transaction ordering, key management, proxy initialization atomicity, and front-running risks. Hands off to findings-verifier for independent verification.\n\nWHEN to spawn:\n- User asks to audit or review Foundry deployment scripts\n- User says 'deploy audit', 'review deploy script', 'deployment security', 'script review'\n- User points at .s.sol files and asks for a security check\n- Before deploying contracts to mainnet where key management and transaction ordering matter\n- User asks about deployment atomicity, front-running risks, or proxy initialization gaps\n\nExamples:\n\n- Example 1:\n  Context: User wants to review a deployment script before mainnet launch.\n  assistant: \"Spawning solidity-deploy-auditor for deployment script security analysis.\"\n  <spawns solidity-deploy-auditor with target path>\n\n- Example 2:\n  Context: User checks out a PR with changes to a .s.sol file.\n  assistant: \"Spawning solidity-deploy-auditor to analyze the deployment script changes.\"\n  <spawns solidity-deploy-auditor with target path>\n\n- Example 3:\n  Context: User asks whether their proxy deployment has initialization gaps.\n  assistant: \"Spawning solidity-deploy-auditor to check proxy atomicity and initialization safety.\"\n  <spawns solidity-deploy-auditor with script path>"
 tools: Agent, Read, Bash, Glob, Grep, Write
 model: opus
 color: red

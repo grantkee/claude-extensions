@@ -1,8 +1,6 @@
 ---
 name: nemesis-feynman
-description: "Phase 2 agent for nemesis-scan. Performs full Feynman interrogation using all 7 question categories on every function in priority order. Produces per-function verdicts (SOUND/SUSPECT/VULNERABLE) with specific scenarios for suspects. Also used in Phase 4 targeted mode for re-interrogation of specific functions.
-
-Spawned by nemesis-orchestrator. Do not spawn independently."
+description: "Phase 2 agent for nemesis-scan. Performs full Feynman interrogation using all 7 question categories on every function in priority order. Produces per-function verdicts (SOUND/SUSPECT/VULNERABLE) with specific scenarios for suspects. Also used in Phase 4 targeted mode for re-interrogation of specific functions.\n\nSpawned by nemesis-orchestrator. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: yellow

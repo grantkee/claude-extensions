@@ -1,8 +1,6 @@
 ---
 name: tn-bug-feynman
-description: "Phase 2 (full) and Phase 4 (targeted) agent for tn-bug-scan. Performs 7-question bug interrogation on every priority target: (1) claim vs reality, (2) concurrent call safety, (3) partial-failure atomicity, (4) non-determinism surface, (5) panic / overflow guards, (6) before/after invariants, (7) error-propagation failure mode. Produces per-function verdicts (SOUND / SUSPECT / VULNERABLE) with failure-mode scenarios.
-
-Spawned by tn-bug-orchestrator. Do not spawn independently."
+description: "Phase 2 (full) and Phase 4 (targeted) agent for tn-bug-scan. Performs 7-question bug interrogation on every priority target: (1) claim vs reality, (2) concurrent call safety, (3) partial-failure atomicity, (4) non-determinism surface, (5) panic / overflow guards, (6) before/after invariants, (7) error-propagation failure mode. Produces per-function verdicts (SOUND / SUSPECT / VULNERABLE) with failure-mode scenarios.\n\nSpawned by tn-bug-orchestrator. Do not spawn independently."
 tools: Read, Glob, Grep
 model: opus
 color: yellow
