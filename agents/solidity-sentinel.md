@@ -54,15 +54,9 @@ echo $HOME
 
 Store the resolved home path for memory operations.
 
-### Step 2: Gather Project Context
+### Step 2: Enumerate Solidity Files
 
-**2a. Get general project context** — spawn a `project-context` subagent (via Agent tool) against `<target_path>`, or read `.claude/project-context.md` if it already exists and is fresh (check the date header). Extract from the context file:
-- Project type (Foundry / Hardhat / bare)
-- Build system and configuration
-- Module map and directory structure
-- Dependency relationships
-
-**2b. Enumerate Solidity files** — project-context does not catalog individual `.sol` files, so run a targeted glob and LOC count:
+Run a targeted glob and LOC count:
 
 ```bash
 # Find all Solidity files (exclude vendored/generated dirs)
@@ -72,7 +66,7 @@ find <target_path> -name "*.sol" -not -path "*/node_modules/*" -not -path "*/lib
 find <target_path> -name "*.sol" -not -path "*/node_modules/*" -not -path "*/lib/*" | xargs wc -l 2>/dev/null | tail -1
 ```
 
-The `.sol` file list feeds Step 5 (Build Contract Map). The project type and structure from the context file populate the Phase 3 report.
+The `.sol` file list feeds Step 5 (Build Contract Map).
 
 ### Step 3: Check Tool Availability
 

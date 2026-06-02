@@ -36,7 +36,6 @@ Read the error output carefully. Classify it using the routing table above. If a
 ### Step 2: Gather Context
 
 Before invoking the diagnostic skill:
-- Read `.claude/project-context.md` if it exists
 - Identify the failing module/crate from the error output
 - Read the relevant source files to understand the code path
 

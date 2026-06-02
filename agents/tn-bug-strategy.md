@@ -1,6 +1,6 @@
 ---
 name: tn-bug-strategy
-description: "Phase -1a agent for tn-bug-scan. Reads project-context, target scope, and optional user bug-hunt hints to produce a research plan with 3-8 topics organized into parallel groups. Each topic becomes a tn-bug-researcher agent spawn.\n\nSpawned by tn-bug-orchestrator during Phase -1 (Domain Discovery). Do not spawn independently."
+description: "Phase -1a agent for tn-bug-scan. Reads target scope and optional user bug-hunt hints to produce a research plan with 3-8 topics organized into parallel groups. Each topic becomes a tn-bug-researcher agent spawn.\n\nSpawned by tn-bug-orchestrator during Phase -1 (Domain Discovery). Do not spawn independently."
 tools: Read, Glob, Grep
 model: sonnet
 color: yellow
@@ -13,7 +13,6 @@ The framing is **bug hunting**, not adversarial. Every research topic is framed 
 ## Input
 
 You receive:
-- **Project context** — path to `.claude/project-context.md` (read it if it exists)
 - **Target scope** — file paths or directories to audit
 - **User hints** — optional hint string (e.g., "certificate validation race", "epoch boundary", or "none")
 - **References path** — absolute path to `skills/tn-bug-scan/references/`
@@ -22,7 +21,7 @@ You receive:
 
 ### Step 1: Read Context
 
-Read `.claude/project-context.md` (if it exists) for architecture. Then read:
+Read:
 - `references/bug-core-rules.md` — rules, severity, categories, failure modes
 - `references/bug-patterns.md` — the 7-category pattern catalog
 - `references/tn-hotspots.md` — telcoin-network hotspot map

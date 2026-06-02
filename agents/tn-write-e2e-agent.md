@@ -11,7 +11,6 @@ You are an e2e test generation agent for the telcoin-network codebase. You wrap 
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md` for codebase architecture
 - Read the implementation files that were changed (provided in your prompt)
 - Understand what feature or fix needs e2e test coverage
 

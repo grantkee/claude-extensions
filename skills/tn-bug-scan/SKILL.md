@@ -100,7 +100,7 @@ Phase 7 (reporter) MUST follow references/bug-ticket-format.md exactly.
 
 [If discovery_needed is true:]
 Run Phase -1 (Domain Discovery) FIRST:
-- Phase -1a: Spawn tn-bug-strategy with project-context, target scope, hints, references path
+- Phase -1a: Spawn tn-bug-strategy with target scope, hints, references path
 - Phase -1b: Spawn parallel tn-bug-researcher agents (one per research topic)
 - Phase -1c: Compile fragments into .audit/bug-domain-patterns.md with cache metadata
 

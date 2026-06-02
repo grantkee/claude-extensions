@@ -34,11 +34,7 @@ One-command security scan for Solidity projects. Spawns 3-4 specialized agents i
 
 ### Phase 1: Context & Scope
 
-#### Step 1: Spawn Project Context
-
-Spawn a `project-context` agent against the target path to ensure `.claude/project-context.md` is fresh. If the file already exists and the date header is within 24 hours, skip this step.
-
-#### Step 2: Detect Scope
+#### Step 1: Detect Scope
 
 Determine what Solidity files to analyze based on user input:
 
@@ -66,7 +62,7 @@ find <target_path> -name "*.sol" \
   -not -path "*/script/*" | head -200
 ```
 
-#### Step 3: Enumerate & Classify
+#### Step 2: Enumerate & Classify
 
 1. **Count Solidity files and LOC** for report metadata:
    ```bash
@@ -120,8 +116,6 @@ Scope: <scope_description>
 Solidity files in scope:
 <file_list>
 
-Read .claude/project-context.md at the target path for architecture context.
-
 Execute all phases of the solidity-sentinel agent and write the final report to:
 <target_path>/solidity-sentinel-report.md
 
@@ -146,8 +140,6 @@ Scope: <scope_description>
 Solidity files in scope:
 <file_list>
 
-Read .claude/project-context.md at the target path for architecture context.
-
 Execute all phases of the solidity-nemesis agent and write the reports to:
 - <target_path>/nemesis.md (exploit hypothesis report)
 - <target_path>/invariants.md (property map from invariant auditor)
@@ -171,8 +163,6 @@ Scope: <scope_description>
 Solidity files in scope:
 <file_list>
 
-Read .claude/project-context.md at the target path for architecture context.
-
 Execute all phases of the solidity-gas-architect agent and write the final report to:
 <target_path>/gas-report.md
 
@@ -195,8 +185,6 @@ Read the agent definition at <target_path_repo>/agents/tn-solidity-deploy-audito
 Target path: <target_path>
 Deployment scripts in scope:
 <s_sol_file_list>
-
-Read .claude/project-context.md at the target path for architecture context.
 
 Execute all phases of the tn-solidity-deploy-auditor agent and write the final report to:
 <target_path>/solidity-deployment-report.md
@@ -352,7 +340,6 @@ Keep this concise — full details are in the individual reports and the summary
 
 | Phase | Agents | Notes |
 |-------|--------|-------|
-| 1 | 0-1 | project-context (if needed) |
 | 2 | 3-4 | Core analysis agents (parallel) |
 | 2 (internal) | ~15-25 | Subagents spawned by the core agents internally |
 | 3 | 1 | Consolidation agent |

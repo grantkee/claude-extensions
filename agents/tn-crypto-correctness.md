@@ -31,7 +31,6 @@ Your focus is on cryptographic operations:
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md`
 - Read changed files, focusing on `crates/types/src/crypto/`, `crates/types/src/primary/`, any file using `blst`, `k256`, or `alloy` signing
 
 ### Step 2: Invoke Skills

@@ -64,7 +64,6 @@ When `discovery_needed` is `true`, run three sub-phases:
 
 Spawn `nemesis-strategy`:
 ```
-- Project context: .claude/project-context.md (if it exists)
 - Target scope: [files/directories]
 - User hints: [domain hints or "none"]
 - Research guide: references/research-guide.md

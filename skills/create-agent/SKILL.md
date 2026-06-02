@@ -46,7 +46,7 @@ After the core 3, continue with:
 5. **Who consumes its output?** (the user directly, other agents, CI systems, reviewers)
 6. **What quality gates should it pass before finishing?** (checklists, formatting, tests passing, etc.)
 7. **Does it coordinate with other agents?** (handoffs, shared contracts, sequencing)
-8. **Should it build knowledge over time?** (persistent memory — useful for agents that learn codebase patterns, user preferences, or project context across conversations)
+8. **Should it build knowledge over time?** (persistent memory — useful for agents that learn user preferences or recurring conventions across conversations)
 9. **What are common failure modes or anti-patterns?** (mistakes it should explicitly avoid, with reasoning)
 
 Don't ask all of these mechanically. Skip questions the user already answered. Combine related questions. The goal is a conversation, not a form.

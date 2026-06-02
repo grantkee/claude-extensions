@@ -11,7 +11,6 @@ You are a documentation generation agent for the telcoin-network codebase. You w
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md` for codebase architecture
 - Identify which crates were modified in the current work
 - Read the modified crate's `lib.rs`/`main.rs` to understand its public API
 

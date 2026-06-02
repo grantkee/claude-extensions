@@ -18,13 +18,7 @@ Given a task description and optionally target files/crates, produce a structure
 
 Invoke the `tn-rust-skills` skill to load telcoin-network conventions and architecture context.
 
-### Step 2: Load Project Context
-
-Read `.claude/project-context.md` in the target repo's root for the full architecture map, crate list, and dependency graph.
-
-If unavailable, read the workspace `Cargo.toml` and top-level `README.md` instead.
-
-### Step 3: Analyze the Task
+### Step 2: Analyze the Task
 
 1. **Read module structure** — read the relevant crate's `lib.rs` / `mod.rs` to understand module organization
 2. **Read target files** — read the specific files that will be modified
@@ -38,7 +32,7 @@ If unavailable, read the workspace `Cargo.toml` and top-level `README.md` instea
 4. **Check boundary crossings** — if the change crosses crate boundaries, note the dependency direction and verify it follows the downward flow rule (types → storage → consensus/execution → engine → node)
 5. **Find existing patterns** — search neighboring code for similar implementations to match
 
-### Step 4: Derive Domains
+### Step 3: Derive Domains
 
 Map the affected files to one or more domain skills using this table. The orchestrator threads the resulting `domains: [...]` list through every downstream agent, which uses it to load `tn-domain-{name}` expert skills.
 
@@ -54,7 +48,7 @@ Map the affected files to one or more domain skills using this table. The orches
 
 A change touching multiple paths gets multiple domains. Be inclusive — extra domain context costs little; missing a domain is how invariant violations slip through.
 
-### Step 5: Produce Output
+### Step 4: Produce Output
 
 Return a structured analysis with these sections:
 

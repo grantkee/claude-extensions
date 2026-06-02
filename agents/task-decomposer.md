@@ -36,7 +36,6 @@ Every task in the decomposition MUST be assigned one agent type from this catalo
 | Agent Type | Why |
 |---|---|
 | `tn-debug-orchestrator` | Reactive — spawned automatically on failure signals, never pre-planned |
-| `project-context` | Pre-decomposition — runs before the decomposer, never assigned by it |
 | `tn-pr-reviewer` | Standalone — manually triggered for PR review, not part of implementation pipeline |
 | Individual security agents (`tn-consensus-safety`, `tn-state-transitions`, `tn-crypto-correctness`, `tn-dos-vectors`, `tn-determinism-verifier`, `tn-contract-safety`, `tn-dependency-auditor`) | Internal to `tn-security-eval` — never assigned individually |
 

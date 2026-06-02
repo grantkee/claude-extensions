@@ -11,7 +11,6 @@ You are a property-based test generation agent for the telcoin-network codebase.
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md` for codebase architecture
 - Read the implementation files that were changed (provided in your prompt)
 - Identify invariants, conservation laws, and properties that must hold for all inputs
 

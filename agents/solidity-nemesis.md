@@ -72,11 +72,7 @@ echo $HOME
 
 Store the resolved home path for memory operations.
 
-### Step 2: Gather Project Context
-
-Check for `.claude/project-context.md`. If it exists and is fresh, extract project type, build system, and module structure. If not, spawn a `project-context` subagent.
-
-Enumerate Solidity files:
+### Step 2: Enumerate Solidity Files
 
 ```bash
 find <target_path> -name "*.sol" -not -path "*/node_modules/*" -not -path "*/lib/*" -not -path "*/out/*" -not -path "*/cache/*" | head -100

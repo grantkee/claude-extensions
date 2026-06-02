@@ -28,7 +28,6 @@ Your focus is on detecting non-deterministic operations:
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md`
 - Read changed files, especially those in `crates/consensus/`, `crates/engine/`, `crates/types/`
 
 ### Step 2: Invoke Skills

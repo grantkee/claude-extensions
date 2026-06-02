@@ -39,7 +39,6 @@ Spawn ALL 10 agents in parallel using the Agent tool. Each agent receives:
 
 1. The list of changed files and their diffs
 2. The full content of changed files
-3. Instructions to read `.claude/project-context.md` for architecture context
 
 The 10 agents and their focus areas:
 

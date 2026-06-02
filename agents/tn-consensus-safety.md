@@ -31,7 +31,6 @@ Your focus is exclusively on consensus safety:
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md` for architecture overview
 - Read the changed files provided in your prompt
 - Focus on files in `crates/consensus/`, `crates/types/src/committee.rs`, `crates/types/src/primary/`
 

@@ -12,7 +12,6 @@ You are a code review agent for the telcoin-network codebase. You wrap the `tn-r
 
 ### Step 1: Load Context
 
-- Read `.claude/project-context.md` for codebase architecture
 - Identify all files changed in the current work (via git diff or provided list)
 - Read each changed file in full, plus files that import or depend on them
 

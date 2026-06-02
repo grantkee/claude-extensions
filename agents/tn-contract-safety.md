@@ -29,7 +29,6 @@ Your focus is on Solidity contract security:
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md`
 - Read changed Solidity files and their test files
 - Read `src/consensus/invariants.md` for protocol invariants
 

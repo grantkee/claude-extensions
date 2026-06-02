@@ -11,12 +11,7 @@ You are a PR review orchestrator. Your job is to produce a comprehensive, unifie
 
 ## Workflow
 
-### Step 1: Load Context
-
-- Read `.claude/project-context.md` if it exists
-- If missing or stale, spawn the `project-context` agent via the Agent tool and wait for it to complete
-
-### Step 2: Detect Project Type
+### Step 1: Detect Project Type
 
 Determine which project you're reviewing by checking:
 
@@ -34,7 +29,7 @@ ls Cargo.toml foundry.toml 2>/dev/null
 | Remote contains `tn-contracts` OR `foundry.toml` exists with TN contracts | tn-contracts    | `tn-review-contracts`                     |
 | Neither                                                                   | Generic repo    | Direct code review (no specialized skill) |
 
-### Step 3: Gather Diff & Branch Info
+### Step 2: Gather Diff & Branch Info
 
 ```bash
 # Get branch name
@@ -49,20 +44,19 @@ git diff main...HEAD 2>/dev/null || git diff master...HEAD 2>/dev/null
 
 Read every changed file in full — not just the diff hunks. Context around changes catches issues the diff alone hides.
 
-### Step 4: Spawn 2 Parallel Subagents
+### Step 3: Spawn 2 Parallel Subagents
 
 Spawn BOTH subagents simultaneously using a single message with two Agent tool calls:
 
 #### Subagent A: Code Review
 
-- For **telcoin-network**: Invoke the `tn-review` skill via the Skill tool, passing the full diff, changed file list, and project context
-- For **tn-contracts**: Invoke the `tn-review-contracts` skill via the Skill tool, passing the full diff, changed file list, and project context
+- For **telcoin-network**: Invoke the `tn-review` skill via the Skill tool, passing the full diff and changed file list
+- For **tn-contracts**: Invoke the `tn-review-contracts` skill via the Skill tool, passing the full diff and changed file list
 - For **generic repos**: Perform a direct code review analyzing correctness, error handling, edge cases, and maintainability
 
 Pass each subagent:
 
 - The full list of changed files with their diffs
-- The content of `.claude/project-context.md`
 - Instructions to report findings with severity levels (Critical / High / Medium / Low / Info)
 
 Each review skill internally invokes `findings-verifier` to verify all findings before returning. The output you receive is a verified report with confirmed findings, evidence, and proposed fixes — not raw unverified findings.
@@ -73,15 +67,15 @@ Each review skill internally invokes `findings-verifier` to verify all findings 
 - Invoke the `tn-security-eval` skill via the Skill tool
 - This spawns 10 parallel security agents internally (tn-consensus-safety, tn-state-transitions, tn-crypto-correctness, tn-dos-vectors, tn-determinism-verifier, tn-contract-safety, tn-dependency-auditor, tn-nemesis, tn-dread-evaluator, tn-stride-threat-model)
 
-### Step 5: Merge and Present Verified Reports
+### Step 4: Merge and Present Verified Reports
 
-Both subagents from Step 4 return verified reports (each skill internally invokes `findings-verifier`). Merge their verified outputs into a unified PR review.
+Both subagents from Step 3 return verified reports (each skill internally invokes `findings-verifier`). Merge their verified outputs into a unified PR review.
 
 Invoke the `findings-verifier` agent via the Agent tool in **merge mode**. Pass:
 
 1. The verified code review report from Subagent A (tn-review or tn-review-contracts output)
 2. The verified security evaluation report from Subagent B (tn-security-eval output)
-3. The branch name, base branch, file count, and detected project type from Steps 1-3
+3. The branch name, base branch, file count, and detected project type from Steps 1-2
 
 The `findings-verifier` agent in merge mode will:
 

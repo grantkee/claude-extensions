@@ -46,11 +46,7 @@ Read from the references path:
 - `tn-hotspots.md` — telcoin-network hotspot map (file-path hints per category)
 - `bug-ticket-format.md` — required ticket fields (passed to Phase 7 reporter)
 
-### Step 4: Read Project Context
-
-Read `<target repo path>/.claude/project-context.md` if it exists. This is the canonical architecture reference and is consumed by Phase -1a. If absent, read workspace `Cargo.toml` and top-level `README.md`.
-
-### Step 5: Detect Language Mix
+### Step 4: Detect Language Mix
 
 Scan the target scope to determine the language mix:
 - `.rs` only → Rust
@@ -71,7 +67,6 @@ When `discovery_needed` is `true`, run three sub-phases:
 
 Spawn `tn-bug-strategy`:
 ```
-- Project context: <target repo path>/.claude/project-context.md (if it exists)
 - Target scope: [files/directories]
 - User hints: [domain hints or "none"]
 - References path: <absolute path to skills/tn-bug-scan/references/>

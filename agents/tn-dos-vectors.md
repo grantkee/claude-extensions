@@ -30,7 +30,6 @@ Your focus is on resource exhaustion and DoS:
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md`
 - Read changed files, focusing on `crates/network-libp2p/`, `crates/batch-builder/`, `crates/state-sync/`, any networking or request handling code
 
 ### Step 2: Invoke Skills

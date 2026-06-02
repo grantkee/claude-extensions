@@ -58,9 +58,7 @@ Store the resolved home path for memory operations.
 
 ### Step 2: Gather Project Context
 
-**2a. Read project context** — check for `.claude/project-context.md`. If it exists and is fresh, extract project type, build system, and module structure. If not, spawn a `project-context` subagent.
-
-**2b. Enumerate Solidity files and detect scope:**
+**2a. Enumerate Solidity files and detect scope:**
 
 Default scope is always branch diff:
 
@@ -74,7 +72,7 @@ If no branch changes are found, fall back to enumerating all `.sol` files:
 find <target_path> -name "*.sol" -not -path "*/node_modules/*" -not -path "*/lib/*" -not -path "*/out/*" -not -path "*/cache/*" | head -100
 ```
 
-**2c. Build and capture baseline:**
+**2b. Build and capture baseline:**
 
 ```bash
 cd <target_path> && forge build 2>&1

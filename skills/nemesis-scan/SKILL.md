@@ -73,7 +73,7 @@ All agents MUST read core-rules.md and language-adaptation.md.
 
 [If discovery_needed is true:]
 Run Phase -1 (Domain Discovery) FIRST:
-- Phase -1a: Spawn nemesis-strategy with project-context, target scope, hints, and research-guide.md
+- Phase -1a: Spawn nemesis-strategy with target scope, hints, and research-guide.md
 - Phase -1b: Spawn parallel nemesis-researcher agents (one per research topic from strategy plan)
 - Phase -1c: Compile fragments into .audit/domain-patterns.md with cache metadata
 

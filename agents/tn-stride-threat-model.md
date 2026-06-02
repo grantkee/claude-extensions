@@ -77,7 +77,6 @@ Can an attacker gain unauthorized capabilities?
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md` for architecture overview
 - Read the changed files provided in your prompt
 - Identify trust boundaries crossed by the changes (network ↔ consensus, consensus ↔ execution, execution ↔ storage, external ↔ RPC)
 

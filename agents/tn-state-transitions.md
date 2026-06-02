@@ -29,7 +29,6 @@ Your focus is on state transition correctness and safety:
 ## Workflow
 
 ### Step 1: Load Context
-- Read `.claude/project-context.md`
 - Read changed files, focusing on `crates/engine/`, `crates/storage/`, `crates/consensus/executor/`
 
 ### Step 2: Invoke Skills
