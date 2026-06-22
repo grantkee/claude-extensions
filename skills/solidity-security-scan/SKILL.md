@@ -13,22 +13,22 @@ One-command security scan for Solidity projects. Spawns 3-4 specialized agents i
 
 ## Agents Orchestrated
 
-| Agent | Domain | Always/Conditional | Output File |
-|-------|--------|-------------------|-------------|
-| `solidity-sentinel` | Defensive analysis (aderyn + slither + manual) | Always | `solidity-sentinel-report.md` |
-| `solidity-nemesis` | Adversarial exploit hypotheses with economics | Always | `nemesis.md` + `invariants.md` |
-| `solidity-gas-architect` | Gas optimization with scrutineer validation | Always | `gas-report.md` |
+| Agent                        | Domain                                            | Always/Conditional         | Output File                     |
+| ---------------------------- | ------------------------------------------------- | -------------------------- | ------------------------------- |
+| `solidity-sentinel`          | Defensive analysis (aderyn + slither + manual)    | Always                     | `solidity-sentinel-report.md`   |
+| `solidity-nemesis`           | Adversarial exploit hypotheses with economics     | Always                     | `nemesis.md` + `invariants.md`  |
+| `solidity-gas-architect`     | Gas optimization with scrutineer validation       | Always                     | `gas-report.md`                 |
 | `tn-solidity-deploy-auditor` | Deployment script security (5 parallel subagents) | If `.s.sol` files in scope | `solidity-deployment-report.md` |
 
 ## Severity Scale
 
-| Level | Definition | Examples |
-|-------|-----------|---------|
+| Level        | Definition                                                              | Examples                                                                 |
+| ------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | **CRITICAL** | Direct fund loss, unauthorized transfer, complete access control bypass | Reentrancy with value, unprotected selfdestruct, proxy storage collision |
-| **HIGH** | Conditional fund loss, broken accounting, governance takeover | Flash loan exploitation, initialization gap, oracle manipulation |
-| **MEDIUM** | DoS vectors, griefing, precision loss, missing critical events | Unbounded loops, front-running windows, stale oracle reads |
-| **LOW** | Gas inefficiencies with security implications, minor validation gaps | Missing zero-address checks, suboptimal storage packing |
-| **INFO** | Code quality, best practices, documentation | NatSpec gaps, naming conventions, style |
+| **HIGH**     | Conditional fund loss, broken accounting, governance takeover           | Flash loan exploitation, initialization gap, oracle manipulation         |
+| **MEDIUM**   | DoS vectors, griefing, precision loss, missing critical events          | Unbounded loops, front-running windows, stale oracle reads               |
+| **LOW**      | Gas inefficiencies with security implications, minor validation gaps    | Missing zero-address checks, suboptimal storage packing                  |
+| **INFO**     | Code quality, best practices, documentation                             | NatSpec gaps, naming conventions, style                                  |
 
 ## Process
 
@@ -39,11 +39,13 @@ One-command security scan for Solidity projects. Spawns 3-4 specialized agents i
 Determine what Solidity files to analyze based on user input:
 
 **PR number provided:**
+
 ```bash
 gh pr diff <number> --name-only | grep '\.sol$'
 ```
 
 **Branch provided or current branch differs from main:**
+
 ```bash
 git diff main...HEAD --name-only | grep '\.sol$'
 ```
@@ -52,6 +54,7 @@ git diff main...HEAD --name-only | grep '\.sol$'
 Use the provided file list directly.
 
 **No scope specified — full project scan:**
+
 ```bash
 find <target_path> -name "*.sol" \
   -not -path "*/node_modules/*" \
@@ -65,6 +68,7 @@ find <target_path> -name "*.sol" \
 #### Step 2: Enumerate & Classify
 
 1. **Count Solidity files and LOC** for report metadata:
+
    ```bash
    find <target_path> -name "*.sol" \
      -not -path "*/node_modules/*" \
@@ -74,6 +78,7 @@ find <target_path> -name "*.sol" \
    ```
 
 2. **Check for `.s.sol` files** in scope to determine deploy-auditor inclusion:
+
    ```bash
    find <target_path> -name "*.s.sol" \
      -not -path "*/node_modules/*" \
@@ -81,6 +86,7 @@ find <target_path> -name "*.sol" \
      -not -path "*/out/*" \
      -not -path "*/cache/*"
    ```
+
    If `.s.sol` files exist, set `DEPLOY_SCRIPTS_IN_SCOPE = true`.
 
 3. **Identify project type**:
@@ -91,6 +97,7 @@ find <target_path> -name "*.sol" \
 #### Step 4: Validate Scope
 
 If zero `.sol` files are found, stop and report:
+
 > "No Solidity files found in scope. Check the target path and any filters applied."
 
 If the scope is very large (100+ files), warn the user and suggest narrowing.
@@ -117,7 +124,7 @@ Solidity files in scope:
 <file_list>
 
 Execute all phases of the solidity-sentinel agent and write the final report to:
-<target_path>/solidity-sentinel-report.md
+<target_path>/reports/solidity-sentinel-report.md
 
 Report back with a brief summary of findings by severity count."
 })
@@ -141,8 +148,8 @@ Solidity files in scope:
 <file_list>
 
 Execute all phases of the solidity-nemesis agent and write the reports to:
-- <target_path>/nemesis.md (exploit hypothesis report)
-- <target_path>/invariants.md (property map from invariant auditor)
+- <target_path>/reports/nemesis.md (exploit hypothesis report)
+- <target_path>/reports/invariants.md (property map from invariant auditor)
 
 Report back with a brief summary: top exploit hypothesis, count by severity, vectors with no viable path."
 })
@@ -164,7 +171,7 @@ Solidity files in scope:
 <file_list>
 
 Execute all phases of the solidity-gas-architect agent and write the final report to:
-<target_path>/gas-report.md
+<target_path>/reports/gas-report.md
 
 Report back with a brief summary: total optimizations proposed, estimated savings, scrutineer flags."
 })
@@ -187,7 +194,7 @@ Deployment scripts in scope:
 <s_sol_file_list>
 
 Execute all phases of the tn-solidity-deploy-auditor agent and write the final report to:
-<target_path>/solidity-deployment-report.md
+<target_path>/reports/solidity-deployment-report.md
 
 Report back with a brief summary of findings by severity and subagent."
 })
@@ -202,14 +209,14 @@ Agent({
   description: "Consolidate Solidity security scan reports",
   prompt: "You are the consolidation agent for a solidity-security-scan. Your job is to read all individual reports and produce a unified summary.
 
-Read the following report files at <target_path>:
+Read the following report files at <target_path>/reports:
 1. solidity-sentinel-report.md
 2. nemesis.md
 3. invariants.md
 4. gas-report.md
 [5. solidity-deployment-report.md — if it exists]
 
-Produce a consolidated summary file at <target_path>/solidity-security-scan-summary.md with this structure:
+Produce a consolidated summary file at <target_path>/reports/solidity-security-scan-summary.md with this structure:
 
 ---
 
@@ -315,12 +322,12 @@ After the consolidation agent returns, output a concise summary to the conversat
 [- tn-solidity-deploy-auditor → solidity-deployment-report.md]
 
 ### Reports
-- **Full summary**: <target_path>/solidity-security-scan-summary.md
-- **Sentinel report**: <target_path>/solidity-sentinel-report.md
-- **Nemesis report**: <target_path>/nemesis.md
-- **Invariant map**: <target_path>/invariants.md
-- **Gas report**: <target_path>/gas-report.md
-[- **Deployment report**: <target_path>/solidity-deployment-report.md]
+- **Full summary**: <target_path>/reports/solidity-security-scan-summary.md
+- **Sentinel report**: <target_path>/reports/solidity-sentinel-report.md
+- **Nemesis report**: <target_path>/reports/nemesis.md
+- **Invariant map**: <target_path>/reports/invariants.md
+- **Gas report**: <target_path>/reports/gas-report.md
+[- **Deployment report**: <target_path>/reports/solidity-deployment-report.md]
 ```
 
 Keep this concise — full details are in the individual reports and the summary file.
@@ -338,12 +345,12 @@ Keep this concise — full details are in the individual reports and the summary
 
 ## Expected Agent Counts
 
-| Phase | Agents | Notes |
-|-------|--------|-------|
-| 2 | 3-4 | Core analysis agents (parallel) |
-| 2 (internal) | ~15-25 | Subagents spawned by the core agents internally |
-| 3 | 1 | Consolidation agent |
-| **Total** | **~20-30** | Typical full scan |
+| Phase        | Agents     | Notes                                           |
+| ------------ | ---------- | ----------------------------------------------- |
+| 2            | 3-4        | Core analysis agents (parallel)                 |
+| 2 (internal) | ~15-25     | Subagents spawned by the core agents internally |
+| 3            | 1          | Consolidation agent                             |
+| **Total**    | **~20-30** | Typical full scan                               |
 
 ## What This Skill Does NOT Do
 
