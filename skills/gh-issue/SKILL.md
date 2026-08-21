@@ -103,6 +103,10 @@ The comment is a short summary a reviewer reads before or alongside the diff. Ke
 - **Issue file**: `issue.md` in the project root.
 - **Comment file**: `comment.md` in the project root.
 
-### Step 6: Present the results
+### Step 6: Evoke format-output agent
+
+Evoke the `format-output` agent to ensure formatting is correct for all markdown files created by this skill.
+
+### Step 7: Present the results
 
 Show the user the full contents of both files so they can review inline. Mention both file paths.
