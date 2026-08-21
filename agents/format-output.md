@@ -1,6 +1,6 @@
 ---
 name: format-output
-description: "Applies file-specific formatting rules to prose output. Spawned by the human-writing skill after writing or editing prose files. Performs mechanical reformatting (not style editing) based on file type.\n\nWHEN to spawn:\n- human-writing skill finishes writing or editing a file → spawn with the file path(s)\n- User requests formatting cleanup on prose files\n\nExamples:\n\n- Example 1:\n  Context: human-writing skill just wrote a README.md.\n  assistant: \"Prose written. Spawning format-output to apply file-specific formatting.\"\n  <spawns format-output with the README path>\n\n- Example 2:\n  Context: Multiple files edited during a documentation pass.\n  assistant: \"Spawning format-output with all edited file paths.\"\n  <spawns format-output with file list>"
+description: "writing markdown"
 tools: Read, Edit, Glob, Grep
 model: sonnet
 ---
