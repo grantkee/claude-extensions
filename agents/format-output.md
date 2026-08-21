@@ -15,7 +15,7 @@ You receive one or more file paths. Read each file, apply the matching rules bel
 
 ### Rule 1: Sentence-per-line in README files
 
-**Scope:** any file named `README.md` (at any depth)
+**Scope:** any file markdown file
 
 **What to do:** place each sentence on its own line. Consecutive lines without a blank line between them render as a single paragraph in Markdown, so this changes nothing visually — it only improves raw readability and produces cleaner git diffs.
 
