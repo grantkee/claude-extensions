@@ -1,0 +1,23 @@
+{
+  "skill_name": "report-to-pr-comments",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "post the findings from report.md as inline comments on PR 1325",
+      "expected_output": "A PENDING review created via POST /pulls/1325/reviews with no `event` field. Every comment anchored to a line inside a diff hunk, verified against /pulls/1325/files before posting and via position-to-line mapping after. Comment bodies carry the report's evidence, not a summary, with severities and verdicts stripped and prose paragraphs on single lines.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "turn this review report into PR comments",
+      "expected_output": "Pre-flight audit of the three comment surfaces first, with duplicates and contradictions reported before drafting. False positives not posted. A pending review created and handed back with a URL, never submitted.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "comment these findings on the PR and request changes",
+      "expected_output": "A PENDING review created with no `event` field, plus an explicit statement that submitting (including REQUEST_CHANGES) is left to the user.",
+      "files": []
+    }
+  ]
+}
