@@ -45,7 +45,8 @@ While reading, note the file path, line numbers, and any concerns across these c
 
 ### Phase 2: Document Findings
 
-Write findings to `report.md` in the project root (or as specified by the user).
+Write findings to `report-{relevent_branch_name_reference}.md` in the project root (or as specified by the user).
+The report name should be based on the specific branch that's checked out.
 
 Report structure:
 
@@ -84,15 +85,17 @@ Severity guide — calibrated for a blockchain node:
 After documenting all findings in Phase 2, invoke the `findings-verifier` agent via the Agent tool to verify each finding independently, produce the final report, and present confirmed results.
 
 Pass to the agent:
-1. The full contents of `report.md` (all documented findings in canonical schema)
+
+1. The full contents of `report-{relevent_branch_name_reference}.md` (all documented findings in canonical schema)
 2. The review scope context (what was reviewed — PR number, crate name, or file list)
 3. The list of all changed files
 
 The `findings-verifier` agent handles:
+
 - Independent subagent verification of each finding (anti-confirmation bias — verifiers never see your original reasoning)
 - Tiered verification (CRITICAL/HIGH individually, MEDIUM batched 2-3, LOW batched 3-5, INFO skipped)
 - Proposed fixes for confirmed findings using the remediation decision tree
-- Updating `report.md` with verification results
+- Updating `report-{relevent_branch_name_reference}.md` with verification results
 - Presenting confirmed findings in the conversation with verification stats
 
 Do not present findings to the user before `findings-verifier` completes. Unverified findings waste time.
