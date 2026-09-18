@@ -119,6 +119,24 @@ Record anchors as you go, in `anchors.json`, naming each finding's body file her
 
 Write each comment to its own file, `comments/NN-slug.md`. Separate files keep the unwrap step and the payload assembly mechanical, and let you re-read a body without scrolling a JSON blob.
 
+#### Open with one plain sentence
+
+Every comment begins with a single sentence naming the problem, then a blank line, then the comment proper. An author scanning eight threads reads that one line and knows what each is about before deciding which to open. Without it they have to parse a paragraph of evidence to find out whether the thread even concerns them.
+
+- It restates the finding's **title** — the same claim, usually near-identical wording. If the title already reads as a sentence, use it as-is.
+- One sentence, and one only. Say what is wrong and what it causes. Not how it was found, not how confident you are, not what to do about it.
+- **No formatting whatsoever.** No bold, no heading, no bullet, no backticks, no link. Write identifiers bare: KeyConfigInner, not `KeyConfigInner`. The sentence is a lead-in, not a label, and formatting makes it read as a title the author skips past.
+- Exactly one blank line after it — a plain paragraph break. Not a `---` rule, not a heading, not two blank lines.
+- Do not repeat it. The body opens with the evidence, not a restatement of the sentence above it.
+
+| Finding title | Opening sentence |
+|---|---|
+| `zip` of worker list and event-stream list silently truncates | The zip of the worker list against the event-stream list truncates to the shorter of the two, so a config with more workers than streams brings up only some of them. |
+| Derived `Debug` on `KeyConfigInner` renders the worker network seed | The derived Debug on KeyConfigInner renders the worker network seed, and this PR dropped the assertion that covered it. |
+| No test covers multi-swarm spawn path | No test covers the multi-swarm spawn path this PR introduces. |
+
+The shape to avoid is the summary that says nothing: "There is an issue with the retry loop." Name the mechanism and the consequence, the way the title does.
+
 **The content is the report's content.** Preserve the concrete line numbers, the code excerpts, the call chain, the failure scenario, the regression evidence against the merge base, the proposed fix. If the report showed that `main` had a backoff and this branch dropped it, that comparison is the strongest thing in the comment — keep it. The comment should be roughly as long as the finding was, minus the scaffolding.
 
 What to strip and what to keep:
@@ -130,7 +148,7 @@ What to strip and what to keep:
 | Confidence rating, verifier counts ("2/2 verifiers agreed") | Drop. |
 | Finding number, category label | Drop. |
 | Prose arguing why a finding got its severity | Drop. Nobody is grading the finding. |
-| Field labels (Claim, Key Question, Location, Relevant Files) | Drop the labels, keep the content. The Claim becomes the opening sentence. |
+| Field labels (Claim, Key Question, Location, Relevant Files) | Drop the labels, keep the content. The Claim usually becomes the first paragraph of the body, under the opening sentence. |
 | Code excerpts, line numbers, call chains, repro steps | Keep verbatim. |
 | Regression evidence vs the merge base | Keep. |
 | Proposed fix | Keep, as a suggestion rather than an instruction. |
@@ -291,6 +309,7 @@ Give the user:
 - Never delete a pending review you did not create in this run. Deleting and re-POSTing your own, to fix an anchor, is fine.
 - Verify every anchor against the diff before posting and every position after posting.
 - The comment carries the report's evidence. If you find yourself writing a one-sentence summary of a twelve-line finding, you have thrown away the part the author needed.
+- Every comment opens with one unformatted sentence restating the finding's title, then a blank line, then the body.
 - Prose paragraphs are single lines. Code, tables, and list items are not.
 - Findings marked false positive are not posted, ever.
 - If a finding's premise turns out to be wrong during pre-flight — already fixed, explicitly requested, deliberate design — say so rather than posting a reframed version that still implies the author erred.
