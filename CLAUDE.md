@@ -8,7 +8,18 @@
 - Use subagents liberally to keep main context window clean
 - Offload research, exploration, and parallel analysis to subagents
 - For complex problems, throw more compute at it via subagents
-- One task per subagent for focused execution
+- Always use opus subagents for execution and implementation tasks - not fable
+- Never use fable agent tokens for basic subagent tasks like file searching
+#### 2a. Scope, don't count (no fixed concurrency cap)
+- There is NO maximum number of concurrent subagents. Fan-out width follows from how independent the work is.
+- What IS capped is each agent's context. One narrow deliverable, an explicit list of paths it may read, and an instruction to hand back rather than explore past them.
+- Budget each agent well under ~250k tokens. An agent trending past that was scoped wrong: it checkpoints, hands back what it has, and the orchestrator respawns a fresh agent for the remainder. Never let one agent balloon to 300k+.
+- Every agent returns a summary, not file dumps.
+#### 2b. Checkpoint to disk so any session survives a rate limit
+- Every subagent prompt names a checkpoint file (prefer the worktree's own `tasks/` path) and requires a `status:` header plus a list of completed sections, rewritten after EACH section — not once at the end.
+- Every subagent prompt says: "on start, read your own checkpoint and continue from the first unfinished section."
+- If Write is refused, do not work around it — return the complete text in the final answer and let the orchestrator save it.
+- After a `429` / session limit: read the checkpoint files on disk BEFORE assuming work was lost (the failure notice under-reports what landed), then resume with SendMessage naming the sections that already exist.
 ### 3. Self-Improvement Loop
 - After ANY correction from the user: update 'tasks/lessons.md" with the pattern
 - Write rules for yourself that prevent the same mistake
