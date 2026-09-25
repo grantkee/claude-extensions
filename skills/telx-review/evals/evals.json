@@ -1,0 +1,51 @@
+{
+  "skill_name": "telx-review",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run a full telx-review of this repo. We're about to open it up to outside contributors and I want to know what is actually wrong before they see it: anything that could cost an LP money, anything that could leak our API keys, and the UX, UI, and performance problems worth fixing first.",
+      "expected_output": "A verified review report (report-<branch>.md) covering all seven angles with a toolchain section, a findings table with verification status, file:line locations, proposed fixes for confirmed findings, a coverage section, and a short conversation summary with verification statistics and grouped action items.",
+      "files": [],
+      "expectations": [
+        "A markdown review report exists in outputs/ with Toolchain, Summary, Findings, and Coverage sections",
+        "Every finding has a Location of the form file_path:line_number where the file exists in the repo and the line is within the file",
+        "Every non-Informational finding carries a verification status (Confirmed, False positive, Design decision, Partially valid, or Not verified), not just an initial severity",
+        "Findings or coverage notes span at least five of the seven angles: web3 safety, app security, data correctness, UX, UI, performance, best practices",
+        "Every confirmed Critical or High finding includes a proposed fix that contains code",
+        "The report states the result of the type check, lint, tests, and build, and those results match an independent run of the same commands",
+        "No standalone finding restates a CONTRIBUTING.md known gap (Prettier not installed, permissive lint rules, deprecated next lint, missing tests) without adding a concrete new defect",
+        "Severity labels use the dapp scale (Critical, High, Medium, Low, Informational) and no finding is justified with blockchain-node concepts such as consensus or validators",
+        "The final conversation summary reports verification statistics (findings submitted versus confirmed) and action items grouped by severity",
+        "At least one verified finding concerns the money path (transaction construction, approvals, decimals, or reward amounts) with a location in src/web3, src/merkl, src/lib/tokens.ts, or src/helpers",
+        "The report contains at least 6 of these 8 issues, each verified true against the code on 2026-09-25: legacy staking transactions sent without a chain check; the dfx route interpolating poolAddress into a URL that carries the backend bearer secret; the faulty-contract Withdraw throwing on ethers v5 .gt() over a v6 bigint; Merkl and legacy Uniswap claims reporting success without reading receipt.status; Uniswap v4 subscribe sent without a chainId; the Alchemy key shipped in the client bundle; next 15.5.9 carrying open advisories; /portfolio crashing on an empty rewards array",
+        "The report itself (not only the chat summary) carries a prioritised action list grouped by severity"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "review the changes on this branch against main before I open the PR",
+      "expected_output": "A diff-scoped review: scope.md listing changed files and their importers, only the relevant angles spawned, a verified report on the branch's changes with file:line locations and fixes, and a toolchain section.",
+      "files": [],
+      "expectations": [
+        "A scope file lists the files changed against main and the files that import them",
+        "Only angles whose file map intersects the changed files are spawned, and the report says which ran",
+        "Every finding cites a file:line inside the changed files or their importers",
+        "The report carries verification status per finding and a toolchain section"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "look at the merkl claim flow (src/merkl plus the merkl-user-rewards api route). is there anything that could send a claim to the wrong place, show the wrong reward amount, or leave a user stuck after clicking claim?",
+      "expected_output": "An area-scoped review that runs at least web3-safety, data-correctness, app-security, and ux, with verified findings on the Merkl distributor address per chain, token and decimals handling, proof and input validation in the route handler, and pending/error feedback in the claim UI.",
+      "files": [],
+      "expectations": [
+        "The review runs at least the web3-safety, data-correctness, app-security, and ux angles",
+        "The Merkl Distributor address and per-chain handling are examined, with a file:line in src/merkl",
+        "Token and decimals handling in the reward filter is examined (symbol versus address match, 18 decimals)",
+        "Input validation in src/app/api/merkl-user-rewards/route.ts is examined",
+        "Pending, error, and rejection feedback in the claim UI is examined",
+        "Every finding presented as confirmed went through verification"
+      ]
+    }
+  ]
+}

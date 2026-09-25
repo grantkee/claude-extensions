@@ -72,6 +72,7 @@ Skills are invoked with `/skill-name` and provide domain-specific capabilities.
 - `tn-security-eval`: Orchestrates 10 parallel security agents for a thorough audit covering consensus, state transitions, cryptography, DoS, determinism, contracts, dependencies, deep business logic (nemesis), DREAD threat assessment, and STRIDE threat classification.
 - `tn-review`: Code review and security analysis for telcoin-network Rust code across consensus, execution, and networking layers.
 - `tn-review-contracts`: Code review and security analysis for tn-contracts Solidity code, focusing on access control and invariant compliance.
+- `telx-review`: Multi-angle review of the telx-frontend dapp (web3 transaction safety, app security, data correctness, UX, UI, performance, best practices) with every finding verified before it is reported.
 - `tn-harden`: Automated hardening sweeps that find non-determinism, panic vectors, missing observability, and async-blocking hazards.
 - `tn-threat-model`: Generates structured threat model documentation for audit preparation and attack surface analysis.
 - `feynman-auditor`: Deep business logic bug finder using the Feynman technique. Language-agnostic — questions every line, ordering choice, and implicit assumption.
