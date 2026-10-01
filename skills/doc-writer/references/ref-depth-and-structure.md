@@ -14,6 +14,12 @@ The question is never "is this too long?" It is "does every paragraph tell the r
 
 When you catch yourself trimming a useful explanation just to be concise, stop. When you catch yourself repeating a point with different adjectives, cut.
 
+### A word count is a target, not a gate
+
+A length someone gives you ("about 1,600 words", "keep it to a page") describes the document they expect. It is not a limit to enforce. Aim for it. If the verified content the reader needs runs longer, go longer, report the count, and say what the extra length carries. Never cut a fact, a caveat, a measurement or a decision rule to reach a number. A limit is hard only when the person says so or the medium enforces it; if you cannot tell, it is a target.
+
+No pass in this pipeline shortens a document to meet a count. A pass that removes text removes redundancy or filler under its own rules, and reports what it removed.
+
 ## Document structure
 
 Write top-down. Start with what matters to the reader, not with background they already have.

@@ -41,6 +41,26 @@ Match the length to the complexity of the topic and the needs of the reader.
 When you catch yourself trimming a useful explanation just to be concise, stop. When you
 catch yourself repeating a point with different adjectives, cut.
 
+### A word count is a target, not a gate
+
+When someone gives you a length ("about 1,600 words", "keep it to a page"), they are
+describing the document they expect. They are not setting a limit to enforce. Aim for it.
+If the verified content the reader needs runs longer, go longer, report the count, and say
+what the extra length carries. Never cut a fact, a caveat, a measurement or a decision rule
+to reach a number. Cutting is right only when the thing cut is redundancy or filler, and
+then the number was never the reason.
+
+A limit is hard only when the person says so or the medium enforces it (a commit subject
+line, a field with a fixed size). If you cannot tell which kind you were given, it is a
+target.
+
+The same holds when you brief someone else. Do not turn a suggested length into a pass/fail
+check, a lint rule, or an instruction to a subagent such as "stay under N words" or "report
+what you cut to make room". An agent told a ceiling will compress to meet it and drop
+content the reader needed, and the compression passes cost more than the writing did. Give
+the target as a range with its purpose, and say what to do when the content exceeds it:
+keep the content and report the length.
+
 ---
 
 ## 1. The vocabulary tax
@@ -431,6 +451,7 @@ Run through this checklist before finalizing any prose output.
 | Check | What to look for |
 |---|---|
 | Depth vs. redundancy | Did you cut something the reader needs? Did you repeat something they already know? |
+| Word targets | Did you cut, or tell anyone else to cut, verified content to reach a word count? Put it back and report the length instead. |
 | AI vocabulary | Any words from the replacement table in section 1? Swap them. |
 | Copula avoidance | "serves as," "stands as," "represents"? Use "is." |
 | Trailing -ing phrases | Sentence ends with "highlighting," "ensuring," etc.? Cut or promote to own sentence. |
