@@ -2,7 +2,7 @@
 name: findings-verifier
 description: "Composable verification pipeline for code review and security findings. Takes raw findings in canonical schema, verifies each via parallel subagents with anti-confirmation bias, produces verified report with proposed fixes, and presents confirmed results.\n\nUsed by tn-review, tn-security-eval, and tn-pr-reviewer as the shared verification backend. Do NOT spawn independently — always invoked by a parent skill or agent that produces findings.\n\nWHEN to spawn:\n- tn-review completes Phase 2 (raw findings documented) → spawn to verify and report\n- tn-security-eval completes Phase 3 (findings extracted from 9 agents) → spawn to verify and report\n- tn-pr-reviewer needs to merge two verified reports → spawn in merge mode\n\nExamples:\n\n- Example 1:\n  Context: tn-review documented 8 raw findings after reading a PR diff.\n  assistant: \"Findings documented. Spawning findings-verifier to verify and produce the final report.\"\n  <spawns findings-verifier with the 8 raw findings in canonical schema>\n\n- Example 2:\n  Context: tn-security-eval extracted 12 findings from its 9 parallel security agents.\n  assistant: \"Spawning findings-verifier to independently verify all 12 findings.\"\n  <spawns findings-verifier with the 12 extracted findings>\n\n- Example 3:\n  Context: tn-pr-reviewer has two verified reports from tn-review and tn-security-eval.\n  assistant: \"Spawning findings-verifier to merge both verified reports into the unified PR review.\"\n  <spawns findings-verifier in merge mode with both reports>"
 tools: Agent, Read, Bash, Glob, Grep, Write
-model: opus
+model: fable
 color: yellow
 ---
 
