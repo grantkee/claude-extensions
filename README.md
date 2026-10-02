@@ -87,7 +87,7 @@ Skills are invoked with `/skill-name` and provide domain-specific capabilities.
 - `doc-writer`: Sequential editing pipeline for technical documentation. Decomposes prose rules into focused single-pass agents.
 - `tn-write-crate-doc`: Generates crate-level rustdoc documentation for telcoin-network crates.
 - `human-writing`: Style guide that keeps prose clear and natural. Applied automatically when writing markdown, issues, PR descriptions, or documentation.
-- `gh-issue`: Produces a focused GitHub issue and a PR comment summarizing all changes on a branch.
+- `gh-issue`: Produces a focused GitHub issue and a PR body (Closes / Problem / Changes / Testing) for a branch.
 - `mermaid`: Creates mermaid diagrams (flowcharts, sequence diagrams, etc.) from natural language descriptions.
 
 ### Tooling
